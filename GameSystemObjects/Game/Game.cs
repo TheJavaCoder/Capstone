@@ -30,8 +30,6 @@ namespace GameSystemObjects
                     }
                 }
 
-                
-
                 // Game loop....
                 Thread.Sleep(33);
             }
@@ -41,7 +39,6 @@ namespace GameSystemObjects
 
     public class Game : IHostedService
     {
-
         Thread gameThread;
 
         public async Task StartAsync(CancellationToken cancellationToken)
