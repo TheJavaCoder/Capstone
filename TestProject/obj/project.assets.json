@@ -1,0 +1,90 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "GameSystemObjects/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/GameSystemObjects.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GameSystemObjects.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "GameSystemObjects/1.0.0": {
+      "type": "project",
+      "path": "../GameSystemObjects/GameSystemObjects.csproj",
+      "msbuildProject": "../GameSystemObjects/GameSystemObjects.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "GameSystemObjects >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\bcostello\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\TestProject\\TestProject.csproj",
+      "projectName": "TestProject",
+      "projectPath": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\TestProject\\TestProject.csproj",
+      "packagesPath": "C:\\Users\\bcostello\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\TestProject\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\bcostello\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "projectReferences": {
+            "C:\\Users\\bcostello\\Documents\\ProjectClicker\\GameSystemObjects\\GameSystemObjects.csproj": {
+              "projectPath": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\GameSystemObjects\\GameSystemObjects.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+C:\Users\bcostello\Documents\ProjectClicker\GameSystemObjects\bin\Debug\netcoreapp3.1\GameSystemObjects.deps.json
+C:\Users\bcostello\Documents\ProjectClicker\GameSystemObjects\bin\Debug\netcoreapp3.1\GameSystemObjects.dll
+C:\Users\bcostello\Documents\ProjectClicker\GameSystemObjects\bin\Debug\netcoreapp3.1\GameSystemObjects.pdb
+C:\Users\bcostello\Documents\ProjectClicker\GameSystemObjects\obj\Debug\netcoreapp3.1\GameSystemObjects.csprojAssemblyReference.cache
+C:\Users\bcostello\Documents\ProjectClicker\GameSystemObjects\obj\Debug\netcoreapp3.1\GameSystemObjects.AssemblyInfoInputs.cache
+C:\Users\bcostello\Documents\ProjectClicker\GameSystemObjects\obj\Debug\netcoreapp3.1\GameSystemObjects.AssemblyInfo.cs
+C:\Users\bcostello\Documents\ProjectClicker\GameSystemObjects\obj\Debug\netcoreapp3.1\GameSystemObjects.csproj.CoreCompileInputs.cache
+C:\Users\bcostello\Documents\ProjectClicker\GameSystemObjects\obj\Debug\netcoreapp3.1\GameSystemObjects.dll
+C:\Users\bcostello\Documents\ProjectClicker\GameSystemObjects\obj\Debug\netcoreapp3.1\GameSystemObjects.pdb
