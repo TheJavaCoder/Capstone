@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameSystemObjects
+namespace GameSystemObjects.Players
 {
-    interface IPlayerRepository
+    public interface IPlayerRepository
     {
         
         public Task<Player> GetPlayer(string name);

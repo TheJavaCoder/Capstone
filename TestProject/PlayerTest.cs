@@ -1,4 +1,5 @@
 ﻿using GameSystemObjects;
+using GameSystemObjects.Players;
 using System;
 using System.Collections.Generic;
 using System.Text;

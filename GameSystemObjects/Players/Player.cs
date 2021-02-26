@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameSystemObjects
+namespace GameSystemObjects.Players
 {
-
+    [Serializable]
     public class Player
     {
-        private string name;
+        public string name { get; }
 
-        private List<ItemTask> items;
+        public List<ItemTask> items { get; }
 
         public Player(string name)
         {
