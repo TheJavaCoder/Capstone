@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\TestProject\\TestProject.csproj",
+      "projectUniqueName": "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\TestProject\\TestProject.csproj",
       "projectName": "TestProject",
-      "projectPath": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\TestProject\\TestProject.csproj",
+      "projectPath": "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\TestProject\\TestProject.csproj",
       "packagesPath": "C:\\Users\\bcostello\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\TestProject\\obj\\",
+      "outputPath": "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\TestProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bcostello\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,8 +53,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\bcostello\\Documents\\ProjectClicker\\GameSystemObjects\\GameSystemObjects.csproj": {
-              "projectPath": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\GameSystemObjects\\GameSystemObjects.csproj"
+            "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\GameSystemObjects\\GameSystemObjects.csproj": {
+              "projectPath": "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\GameSystemObjects\\GameSystemObjects.csproj"
             }
           }
         }

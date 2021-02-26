@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\GameSystemObjects\\GameSystemObjects.csproj",
+      "projectUniqueName": "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\GameSystemObjects\\GameSystemObjects.csproj",
       "projectName": "GameSystemObjects",
-      "projectPath": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\GameSystemObjects\\GameSystemObjects.csproj",
+      "projectPath": "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\GameSystemObjects\\GameSystemObjects.csproj",
       "packagesPath": "C:\\Users\\bcostello\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\GameSystemObjects\\obj\\",
+      "outputPath": "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\GameSystemObjects\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bcostello\\AppData\\Roaming\\NuGet\\NuGet.Config",

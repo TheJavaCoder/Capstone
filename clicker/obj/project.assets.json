@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\clicker\\clicker.csproj",
+      "projectUniqueName": "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\clicker\\clicker.csproj",
       "projectName": "clicker",
-      "projectPath": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\clicker\\clicker.csproj",
+      "projectPath": "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\clicker\\clicker.csproj",
       "packagesPath": "C:\\Users\\bcostello\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bcostello\\Documents\\ProjectClicker\\clicker\\obj\\",
+      "outputPath": "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\clicker\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bcostello\\AppData\\Roaming\\NuGet\\NuGet.Config",
