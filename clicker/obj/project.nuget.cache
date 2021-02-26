@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "Yy5Jh4CNy7xGo+fipzIBxiPg/LCspYSbHurDR4J/r+BuxZ+E8YhtcWqAQhhhrj5I7356YQSgx83Gbnk6Yy7OYw==",
+  "dgSpecHash": "+koPKdjrFNZW0coutFRFb4uUHHMojlgb/zOqYBvSdGCk/5+OCUV/saqe/l7zPiGCiWAbLW/jSHyMAjX5e0+Gxg==",
   "success": true,
   "projectFilePath": "C:\\Users\\bcostello\\Documents\\GitHub\\Capstone\\clicker\\clicker.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\bcostello\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\bcostello\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\bcostello\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\5.0.0\\microsoft.extensions.fileproviders.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\bcostello\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\5.0.0\\microsoft.extensions.hosting.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\bcostello\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
