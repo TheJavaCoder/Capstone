@@ -27,6 +27,7 @@ namespace clicker.Controllers
                 new ItemTask 
                 { 
                     itemName = "testItem",
+                    //enabled = true,
                 },
 
             }, "Test");

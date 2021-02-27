@@ -1,5 +1,7 @@
 ﻿using GameSystemObjects.Players;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading;
@@ -9,7 +11,7 @@ namespace GameSystemObjects
 {
     public class GameLoop
     {
-        public void ExecuteAsync()
+        public void run()
         {
 
             while (true)
@@ -39,23 +41,62 @@ namespace GameSystemObjects
 
     public class GameSave
     {
+        IPlayerRepository playerRepository;
 
+        public GameSave(IPlayerRepository playerRepository)
+        {
+            this.playerRepository = playerRepository;
+        }
+
+        public void run()
+        {
+
+            while (true)
+            {
+                if (!GameState.current.players.IsEmpty)
+                {
+
+                    foreach (Player p in GameState.current.players)
+                    {
+                        playerRepository.SavePlayer(p);
+                    }
+
+                }
+
+                Thread.Sleep(30000);
+            }
+
+        }   
     }
 
     public class Game : IHostedService
     {
+        IPlayerRepository playerRepository;
+
         Thread gameThread;
+        Thread saveThread;
+
+        public Game(IServiceProvider serviceCollection)
+        {
+            // Commented out as this doesn't exist yet.
+            //playerRepository = serviceCollection.GetRequiredService<IPlayerRepository>();
+        }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             GameLoop gl = new GameLoop();
-            gameThread = new Thread(new ThreadStart(gl.ExecuteAsync));
+            gameThread = new Thread(new ThreadStart(gl.run));
             gameThread.Start();
+
+            //GameSave gs = new GameSave(playerRepository);
+            //saveThread = new Thread(new ThreadStart(gs.run));
+            //saveThread.Start();
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
             gameThread.Suspend();
+            //saveThread.Suspend();
         }
     }
 
