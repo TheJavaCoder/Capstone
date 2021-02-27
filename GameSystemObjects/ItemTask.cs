@@ -16,7 +16,11 @@ namespace GameSystemObjects
 
         public long itemAmount { get; set; }
 
-        public string calcString { get; set; }
+        // the last time an item was gathered
+        public long lastStartedTime { get; set; }
+
+        // the time it takes an item to be gathered
+        public string timeCalc { get; set; }
 
         public bool enabled { get; set; }
 

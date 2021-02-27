@@ -37,6 +37,11 @@ namespace GameSystemObjects
         }
     }
 
+    public class GameSave
+    {
+
+    }
+
     public class Game : IHostedService
     {
         Thread gameThread;
