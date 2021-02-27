@@ -7,4 +7,5 @@ Gwinnett tech capstone c# dotnet core project
 John Garner, 
 Tyler Stanton, 
 Placidie Mugabo,
-Bailey Costello
+Bailey Costello,
+Alan Farmer
