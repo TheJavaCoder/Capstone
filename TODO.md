@@ -1,6 +1,6 @@
 This documents what needs to be done in the project and when
 
-C#:
+**C#:**
 
 PlayerRepository.cs
 - [ ] Implement the functions that call stored procedures
@@ -13,11 +13,11 @@ PlayerController.cs
 - [ ] There might need to be more functions created as well
 
 
-SQL:
+**SQL:**
 - [ ] Create stored procedure for reading / saving the player
 - [ ] Create stored procedure for reading / saving the inventory
 
-ClientSide:
+**Client Side:**
 - [ ] Create a scroll view 
 - [ ] Programmatically add buttons to it
 - [ ] Make those buttons call the middle tier with put requests
