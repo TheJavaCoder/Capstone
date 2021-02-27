@@ -20,7 +20,7 @@ namespace clicker.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<bool>> LoginAsync() 
+        public async Task<ActionResult<Player>> LoginAsync() 
         {
             Player p = new Player(new List<ItemTask> 
             { 
@@ -32,9 +32,11 @@ namespace clicker.Controllers
 
             }, "Test");
 
+            p.lastSeenTime = DateTime.Now;
+
             GameState.current.players.Add(p);
 
-            return true;
+            return p;
         }
 
         [HttpGet]
@@ -42,6 +44,8 @@ namespace clicker.Controllers
         {
 
             Player p = await GameState.GetPlayer("Test");
+
+            p.lastSeenTime = DateTime.Now;
 
             if (p != null)
             {

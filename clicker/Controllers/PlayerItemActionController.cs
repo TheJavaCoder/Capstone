@@ -23,15 +23,20 @@ namespace clicker.Controllers
         {
             Player p = await GameState.GetPlayer(playerItemAction.player);
 
+            p.lastSeenTime = DateTime.Now;
+
             if (p == null)
                 return false;
 
+            bool output = true;
+            
             switch(playerItemAction.action)
             {
                 case Action.ENABLE:
-                    p.switchEnabledTask(playerItemAction.item);
+                    output = await p.switchEnabledTask(playerItemAction.item);
                     break;
                 case Action.DISABLE:
+                    output = await p.disableTask();
                     break;
                 case Action.BUY:
                     break;
@@ -43,7 +48,7 @@ namespace clicker.Controllers
                     return false;
             }
 
-            return true;
+            return output;
         }
 
     }

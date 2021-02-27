@@ -13,6 +13,8 @@ namespace GameSystemObjects.Players
 
         public List<ItemTask> items { get; }
 
+        public DateTime lastSeenTime { get; set; }
+
         public Player(string name)
         {
             this.name = name;
@@ -64,6 +66,16 @@ namespace GameSystemObjects.Players
         public ItemTask getEnabledTask()
         {
             return items.Where(i => i.enabled == true).FirstOrDefault();
+        }
+
+        public async Task<bool> disableTask()
+        {
+            ItemTask currentlyEnabled = getEnabledTask();
+            if (currentlyEnabled == null)
+                return false;
+
+            currentlyEnabled.enabled = false;
+            return true;
         }
 
         public async Task<bool> switchEnabledTask(string name)
