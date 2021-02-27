@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GameSystemObjects;
 using GameSystemObjects.Players;
@@ -20,27 +18,32 @@ namespace clicker.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<bool>> LoginAsync() 
+        public async Task<ActionResult<Player>> LoginAsync() 
         {
             Player p = new Player(new List<ItemTask> 
             { 
                 new ItemTask 
                 { 
                     itemName = "testItem",
+                    //enabled = true,
                 },
 
             }, "Test");
 
-            GameState.current.players.Add(p);
+            p.lastSeenTime = DateTime.Now;
 
-            return true;
+            GameState.current.players.TryAdd(p.name, p);
+
+            return p;
         }
 
         [HttpGet]
         public async Task<ActionResult<Player>> GetPlayerAsync()
         {
 
-            Player p = await GameState.current.GetPlayer("Test");
+            Player p = await GameState.GetPlayer("Test");
+
+            p.lastSeenTime = DateTime.Now;
 
             if (p != null)
             {
@@ -52,7 +55,6 @@ namespace clicker.Controllers
 
             return p;
         }
-
 
         IPlayerRepository m_PlayerRepository;
 
