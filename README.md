@@ -1,5 +1,7 @@
 # Capstone
-Gwinnett tech capstone c# project
+Gwinnett tech capstone c# dotnet core project
+
+
 
 # Members
 John Garner, 
