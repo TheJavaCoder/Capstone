@@ -41,7 +41,7 @@ namespace clicker.Controllers
         public async Task<ActionResult<Player>> GetPlayerAsync()
         {
 
-            Player p = await GameState.current.GetPlayer("Test");
+            Player p = await GameState.GetPlayer("Test");
 
             if (p != null)
             {
@@ -53,7 +53,6 @@ namespace clicker.Controllers
 
             return p;
         }
-
 
         IPlayerRepository m_PlayerRepository;
 

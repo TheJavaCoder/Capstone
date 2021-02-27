@@ -1,9 +1,7 @@
 ﻿using GameSystemObjects.Players;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Concurrent;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,7 +30,7 @@ namespace GameSystemObjects
                     }
                 }
 
-                // Game loop....
+                // Game loop every 1/30th of a second.
                 Thread.Sleep(33);
             }
 
@@ -43,6 +41,7 @@ namespace GameSystemObjects
     {
         IPlayerRepository playerRepository;
 
+        // Getting the repository instance that this thread needs to use.
         public GameSave(IPlayerRepository playerRepository)
         {
             this.playerRepository = playerRepository;
@@ -63,6 +62,7 @@ namespace GameSystemObjects
 
                 }
 
+                // Saves all the players every 30 seconds
                 Thread.Sleep(30000);
             }
 
@@ -71,17 +71,21 @@ namespace GameSystemObjects
 
     public class Game : IHostedService
     {
+        // Need a link to the current Repository Singleton instance
         IPlayerRepository playerRepository;
 
+        // Threads to run and save the game
         Thread gameThread;
         Thread saveThread;
 
+        // Passing in the repository instance
         public Game(IServiceProvider serviceCollection)
         {
             // Commented out as this doesn't exist yet.
             //playerRepository = serviceCollection.GetRequiredService<IPlayerRepository>();
         }
 
+        // Building both threads.
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             GameLoop gl = new GameLoop();
@@ -93,6 +97,7 @@ namespace GameSystemObjects
             //saveThread.Start();
         }
 
+        // Clean up the threads. Should never get called.
         public async Task StopAsync(CancellationToken cancellationToken)
         {
             gameThread.Suspend();
@@ -103,6 +108,7 @@ namespace GameSystemObjects
     // This is a static cache object.
     public class GameState 
     {
+        // The current static gamestate object Called by: GameState.current
         public static GameState current { get; set; }
 
         static GameState() 
@@ -114,9 +120,9 @@ namespace GameSystemObjects
         // Thread safe list
         public ConcurrentBag<Player> players { get; set; }
 
-        public async Task<Player> GetPlayer(string name)
+        public static async Task<Player> GetPlayer(string name)
         {
-            foreach(Player p in players) {
+            foreach(Player p in GameState.current.players) {
 
                 if (p.name == name)
                     return p;
