@@ -6,7 +6,7 @@ PlayerRepository.cs
 - [ ] Implement the functions that call stored procedures
 
 Game.cs
-- [ ] Saving of the game state in a different thread with the GameSave class
+- [x] Saving of the game state in a different thread with the GameSave class - Bailey 2/26
 
 PlayerController.cs
 - [ ] Implement LoginAsync to work correctly and use the db repository 
