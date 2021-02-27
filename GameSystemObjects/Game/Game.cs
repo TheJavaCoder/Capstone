@@ -19,8 +19,11 @@ namespace GameSystemObjects
                 {
 
                     // Loop through all the players.
-                    foreach (Player p in GameState.current.players)
+                    foreach (string key in GameState.current.players.Keys)
                     {
+                        Player p;
+                        GameState.current.players.TryGetValue(key, out p);
+
                         // Get their current task
                         ItemTask currentTask = p.getEnabledTask();
 
@@ -55,8 +58,10 @@ namespace GameSystemObjects
                 if (!GameState.current.players.IsEmpty)
                 {
 
-                    foreach (Player p in GameState.current.players)
+                    foreach (string key in GameState.current.players.Keys)
                     {
+                        Player p;
+                        GameState.current.players.TryGetValue(key, out p);
                         playerRepository.SavePlayer(p);
                     }
 
@@ -69,6 +74,43 @@ namespace GameSystemObjects
         }   
     }
 
+    public class CleanUpSessions
+    {
+        IPlayerRepository playerRepository;
+
+        public CleanUpSessions(IPlayerRepository playerRepository)
+        {
+            this.playerRepository = playerRepository;
+        }
+
+        public void run()
+        {
+
+            while (true)
+            {
+                if (!GameState.current.players.IsEmpty)
+                {
+                    foreach (string key in GameState.current.players.Keys)
+                    {
+                        Player p;
+                        GameState.current.players.TryGetValue(key, out p);
+
+                        if (p.lastSeenTime > DateTime.Now.AddMinutes(1))
+                        {
+                            playerRepository.SavePlayer(p);
+                            GameState.current.players.TryRemove(p.name, out _); 
+                        }
+                    }
+                }
+
+                // Remove client if they haven't been seen (or better yet heard for more than a min) and attempt to save their current state.
+                Thread.Sleep(61000);
+            }
+
+        }
+
+    }
+
     public class Game : IHostedService
     {
         // Need a link to the current Repository Singleton instance
@@ -77,6 +119,7 @@ namespace GameSystemObjects
         // Threads to run and save the game
         Thread gameThread;
         Thread saveThread;
+        Thread cleanUpSessions;
 
         // Passing in the repository instance
         public Game(IServiceProvider serviceCollection)
@@ -95,6 +138,8 @@ namespace GameSystemObjects
             //GameSave gs = new GameSave(playerRepository);
             //saveThread = new Thread(new ThreadStart(gs.run));
             //saveThread.Start();
+
+
         }
 
         // Clean up the threads. Should never get called.
@@ -114,22 +159,17 @@ namespace GameSystemObjects
         static GameState() 
         {
             //Init
-            current = new GameState { players = new ConcurrentBag<Player>(), };
+            current = new GameState { players = new ConcurrentDictionary<string, Player>(), };
         }
 
         // Thread safe list
-        public ConcurrentBag<Player> players { get; set; }
+        public ConcurrentDictionary<string, Player> players { get; set; }
 
         public static async Task<Player> GetPlayer(string name)
         {
-            foreach(Player p in GameState.current.players) {
-
-                if (p.name == name)
-                    return p;
-
-            }
-
-            return null;
+            Player player;
+            GameState.current.players.TryGetValue(name, out player);
+            return player;
         }
 
     }

@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using GameSystemObjects;
 using GameSystemObjects.Players;
@@ -34,7 +32,7 @@ namespace clicker.Controllers
 
             p.lastSeenTime = DateTime.Now;
 
-            GameState.current.players.Add(p);
+            GameState.current.players.TryAdd(p.name, p);
 
             return p;
         }
