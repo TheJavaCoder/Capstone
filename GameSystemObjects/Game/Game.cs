@@ -95,7 +95,7 @@ namespace GameSystemObjects
                         Player p;
                         GameState.current.players.TryGetValue(key, out p);
 
-                        if (p.lastSeenTime > DateTime.Now.AddMinutes(1))
+                        if (p.lastSeenTime.AddMinutes(1) > DateTime.Now)
                         {
                             playerRepository.SavePlayer(p);
                             GameState.current.players.TryRemove(p.name, out _); 
