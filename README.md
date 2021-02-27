@@ -5,5 +5,5 @@ Gwinnett tech capstone c# project
 John Garner, 
 Tyler Stanton, 
 Placidie Mugabo,
-Bailey Costello
+Bailey Costello,
 Alan Farmer
