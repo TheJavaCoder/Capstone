@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="taskList.xaml~RF11f297b2.TMP" />
+  </ItemGroup>
+
 </Project>
