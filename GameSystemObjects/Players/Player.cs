@@ -35,7 +35,11 @@ namespace GameSystemObjects.Players
             if (foundItem == null)
                 return;
 
-            foundItem.itemAmount++;
+            if (new DateTime(foundItem.lastStartedTime + foundItem.timeCalc) < DateTime.Now)
+            {
+                foundItem.itemAmount *= foundItem.resourceGatheringLevel;
+                foundItem.lastStartedTime = DateTime.Now.Ticks;
+            }
         }
 
 
