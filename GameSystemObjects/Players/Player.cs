@@ -38,14 +38,14 @@ namespace GameSystemObjects.Players
         }
 
 
-        public async Task<bool> UpgradeGatheringLevel(string item, int amount)
+        public async Task<bool> UpgradeGatheringLevel(string item)
         {
             ItemTask foundItem = getItem(item);
 
             if (foundItem == null)
                 return false;
 
-            if (foundItem.upgradeGatheringLevelCost() > amount)
+            if (foundItem.upgradeGatheringLevelCost() > foundItem.itemAmount)
                 return false;
 
             foundItem.resourceGatheringLevel++;
