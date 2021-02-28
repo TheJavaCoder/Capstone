@@ -56,6 +56,17 @@ namespace clicker.Controllers
             return p;
         }
 
+        // [HttpPut]
+        //public async Task<ActionResult<bool>> SaveAndRemove()
+        //{
+
+        //    Player p;
+        //    GameState.current.players.TryRemove(p.name, out p);
+        //    await m_PlayerRepository.SavePlayer(p);
+
+        //    return true;
+        //}
+
         IPlayerRepository m_PlayerRepository;
 
     }
