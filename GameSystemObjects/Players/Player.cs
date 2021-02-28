@@ -17,6 +17,7 @@ namespace GameSystemObjects.Players
 
         public Player(string name)
         {
+            lastSeenTime = DateTime.Now;
             this.name = name;
             items = new List<ItemTask>();
         }
