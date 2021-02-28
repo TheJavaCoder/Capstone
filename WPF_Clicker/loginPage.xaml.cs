@@ -22,5 +22,10 @@ namespace WPF_Clicker
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
