@@ -23,6 +23,8 @@ namespace WPF_Clicker
         public MainWindow()
         {
             InitializeComponent();
+
+            PageContainer.Content = new loginPage(this);
         }
     }
 }

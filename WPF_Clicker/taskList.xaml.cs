@@ -18,9 +18,13 @@ namespace WPF_Clicker
     /// </summary>
     public partial class taskList : Page
     {
-        public taskList()
+
+        private Window window;
+
+        public taskList(Window w)
         {
             InitializeComponent();
+            window = w;
         }
     }
 }

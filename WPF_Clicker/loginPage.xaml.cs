@@ -18,14 +18,18 @@ namespace WPF_Clicker
     /// </summary>
     public partial class loginPage : Page
     {
-        public loginPage()
+        private Window window;
+
+        public loginPage(Window w)
         {
             InitializeComponent();
+            window = w;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
+            window.Content = new taskList(window);
         }
     }
 }
