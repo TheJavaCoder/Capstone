@@ -37,22 +37,23 @@ namespace GameSystemObjects.Players
 
             if (new DateTime(foundItem.lastStartedTime + foundItem.timeCalc) < DateTime.Now)
             {
-                foundItem.itemAmount *= foundItem.resourceGatheringLevel;
+                foundItem.itemAmount += foundItem.resourceGatheringLevel;
                 foundItem.lastStartedTime = DateTime.Now.Ticks;
             }
         }
 
 
-        public async Task<bool> UpgradeGatheringLevel(string item, int amount)
+        public async Task<bool> UpgradeGatheringLevel(string item)
         {
             ItemTask foundItem = getItem(item);
 
             if (foundItem == null)
                 return false;
 
-            if (foundItem.upgradeGatheringLevelCost() > amount)
+            if (foundItem.upgradeGatheringLevelCost() > foundItem.itemAmount)
                 return false;
 
+            foundItem.itemAmount -= foundItem.upgradeGatheringLevelCost();
             foundItem.resourceGatheringLevel++;
 
             return true;
