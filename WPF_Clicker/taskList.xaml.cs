@@ -19,14 +19,19 @@ namespace WPF_Clicker
     public partial class taskList : Page
     {
 
-        private Window window;
+        private MainWindow window;
 
-        public taskList(Window w)
+        public taskList(MainWindow w)
         {
             InitializeComponent();
             window = w;
 
             //TaskButton.Background = (Brush) new BrushConverter().ConvertFrom("#616161");
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            window.Content = new Settings(window);
         }
     }
 }

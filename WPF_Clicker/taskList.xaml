@@ -54,8 +54,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="TaskButton" Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" BorderThickness="0 0 1 0" >Tasks</Button>
-            <Button Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" Grid.Column="2" BorderThickness="1 0 0 0">Settings</Button>
+            <Button x:Name="TaskButton" Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" BorderThickness="0 0 1 0" Cursor="Hand">Tasks</Button>
+            <Button Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" Grid.Column="2" BorderThickness="1 0 0 0" Cursor="Hand" Click="Settings_Click">Settings</Button>
             
         </Grid>
 

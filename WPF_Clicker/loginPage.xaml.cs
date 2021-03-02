@@ -18,9 +18,9 @@ namespace WPF_Clicker
     /// </summary>
     public partial class loginPage : Page
     {
-        private Window window;
+        private MainWindow window;
 
-        public loginPage(Window w)
+        public loginPage(MainWindow w)
         {
             InitializeComponent();
             window = w;

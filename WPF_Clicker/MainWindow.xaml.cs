@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameSystemObjects.Players;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace WPF_Clicker
     /// </summary>
     public partial class MainWindow : Window
     {
+        Player player;
+
         public MainWindow()
         {
             InitializeComponent();

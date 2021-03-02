@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <None Remove="taskList.xaml~RF11f297b2.TMP" />
+	  
   </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\GameSystemObjects\GameSystemObjects.csproj" />
+	</ItemGroup>
 
 </Project>

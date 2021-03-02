@@ -18,9 +18,17 @@ namespace WPF_Clicker
     /// </summary>
     public partial class Settings : Page
     {
-        public Settings()
+        private MainWindow mainWindow;
+
+        public Settings(MainWindow mw)
         {
             InitializeComponent();
+            mainWindow = mw;
+        }
+
+        private void TaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.Content = new taskList(mainWindow);
         }
     }
 }
