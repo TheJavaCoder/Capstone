@@ -25,6 +25,8 @@ namespace WPF_Clicker
         {
             InitializeComponent();
             window = w;
+
+            //TaskButton.Background = (Brush) new BrushConverter().ConvertFrom("#616161");
         }
     }
 }
