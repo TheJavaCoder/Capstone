@@ -39,12 +39,14 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </Page.Resources>
+    
+    
 
     <Grid x:Name="globalContainer" Background="#303030">
         <Label HorizontalAlignment="Center" FontSize="25" FontStyle="Normal" Foreground="White" FontWeight="ExtraLight">Task List</Label>
         <Line X1="00" Y1="50" X2="290" Y2="50" HorizontalAlignment="Center" Stroke="white" StrokeThickness="1" SnapsToDevicePixels="True" />
 
-        <ScrollViewer Margin="0, 55, 0, 60"></ScrollViewer>
+        <ScrollViewer Margin="0, 55, 0, 60" HorizontalScrollBarVisibility="Disabled" x:Name="ContentContainer"></ScrollViewer>
 
         <Grid Height="60"  Grid.Row="1" Margin="00" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
