@@ -38,8 +38,9 @@ namespace WPF_Clicker
 
         public async Task initData()
         {
-            Player p = await window.GetPlayerAsync("");
-            SynchronizationContext.Current.Post(_=> TaskLabel.Content = p.name, null);
+            Player p = await window.GetPlayerAsync("Bailey");
+            if(p != null)
+                SynchronizationContext.Current.Post(_=> TaskLabel.Content = p.name, null);
             
         }
 

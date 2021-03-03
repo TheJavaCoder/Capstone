@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GameSystemObjects;
 using GameSystemObjects.Players;
+using GameSystemObjects.ControllerModels;
 
 namespace clicker.Controllers
 {
@@ -18,7 +19,7 @@ namespace clicker.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Player>> LoginAsync() 
+        public async Task<ActionResult<Player>> LoginAsync(PlayerLoginModel playerLoginModel) 
         {
             Player p = new Player(new List<ItemTask> 
             { 
@@ -28,7 +29,7 @@ namespace clicker.Controllers
                     //enabled = true,
                 },
 
-            }, "Test");
+            }, playerLoginModel.name);
 
             p.lastSeenTime = DateTime.Now;
 
@@ -38,10 +39,11 @@ namespace clicker.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Player>> GetPlayerAsync()
+        [Route("{playerName}")]
+        public async Task<ActionResult<Player>> GetPlayerAsync(string playerName)
         {
 
-            Player p = await GameState.GetPlayer("Test");
+            Player p = await GameState.GetPlayer(playerName);
 
             if (p != null)
             {

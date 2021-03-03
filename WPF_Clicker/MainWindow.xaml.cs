@@ -40,7 +40,7 @@ namespace WPF_Clicker
 
         public async Task<Player> GetPlayerAsync(string pName)
         {
-            HttpResponseMessage responseMessage = await client.GetAsync("api/player");
+            HttpResponseMessage responseMessage = await client.GetAsync("api/player/" + pName);
             if (responseMessage.IsSuccessStatusCode)
             {
                 player = await responseMessage.Content.ReadAsAsync<Player>( Formatter.MediaTypeFormatters );
