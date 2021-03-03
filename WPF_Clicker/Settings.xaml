@@ -38,6 +38,8 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+        <Image x:Key="pick" Source="resources/Pick.png" Width="40" />
+        <Image x:Key="hamburger" Source="resources/menu.png" Width="30" />
     </Page.Resources>
 
 
@@ -54,8 +56,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="TaskButton" Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" BorderThickness="0 0 1 0" Cursor="Hand" Click="TaskButton_Click">Tasks</Button>
-            <Button Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" Grid.Column="2" BorderThickness="1 0 0 0" Cursor="Hand">Settings</Button>
+            <Button x:Name="TaskButton" Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" BorderThickness="0 0 1 0" Cursor="Hand" Click="TaskButton_Click" Content="{StaticResource pick}"></Button>
+            <Button Template="{DynamicResource ButtonTemplate1}" Background="#545454" Foreground="White" Grid.Column="2" BorderThickness="1 0 0 0" Cursor="Hand" Content="{StaticResource hamburger}"></Button>
 
         </Grid>
 
