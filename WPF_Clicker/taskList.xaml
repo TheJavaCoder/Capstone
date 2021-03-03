@@ -39,7 +39,7 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
         <Image x:Key="pick" Source="resources/Pick.png" Width="40" />
-        <Image x:Key="hamburger" Source="resources/menu.png" Width="40" />
+        <Image x:Key="hamburger" Source="resources/menu.png" Width="30" />
     </Page.Resources>
 
 

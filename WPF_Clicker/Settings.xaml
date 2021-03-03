@@ -44,7 +44,7 @@
 
 
 
-    <Grid x:Name="globalContainer" Background="#303030">
+    <Grid x:Name="globalContainer" Background="#3B3B3B">
         <Label HorizontalAlignment="Center" FontSize="25" FontStyle="Normal" Foreground="White" FontWeight="ExtraLight">Settings</Label>
         <Line X1="00" Y1="50" X2="290" Y2="50" HorizontalAlignment="Center" Stroke="white" StrokeThickness="1" SnapsToDevicePixels="True" />
 
