@@ -9,7 +9,7 @@ namespace GameSystemObjects.ControllerModels
         ENABLE, DISABLE, BUY, SELL, UPGRADE
     }
 
-    public class PlayerActionItemModel
+    public class PlayerItemActionModel
     { 
         public string player { get; set; }
         public string item { get; set; }
