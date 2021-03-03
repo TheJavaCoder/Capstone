@@ -9,11 +9,16 @@ namespace GameSystemObjects.Players
     [Serializable]
     public class Player
     {
-        public string name { get; }
+        public string name { get; set; }
 
         public List<ItemTask> items { get; }
 
         public DateTime lastSeenTime { get; set; }
+
+        public Player()
+        {
+        
+        }
 
         public Player(string name)
         {

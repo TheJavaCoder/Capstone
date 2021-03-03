@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:WPF_Clicker"
       mc:Ignorable="d" 
       Height="500" Width="330"
-      Title="taskList">
+      Title="taskList" Loaded="Page_Loaded">
     <Page.Resources>
         <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
         <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
@@ -43,7 +43,7 @@
     
 
     <Grid x:Name="globalContainer" Background="#303030">
-        <Label HorizontalAlignment="Center" FontSize="25" FontStyle="Normal" Foreground="White" FontWeight="ExtraLight">Task List</Label>
+        <Label x:Name="TaskLabel" HorizontalAlignment="Center" FontSize="25" FontStyle="Normal" Foreground="White" FontWeight="ExtraLight">Task List</Label>
         <Line X1="00" Y1="50" X2="290" Y2="50" HorizontalAlignment="Center" Stroke="white" StrokeThickness="1" SnapsToDevicePixels="True" />
 
         <ScrollViewer Margin="0, 55, 0, 60" HorizontalScrollBarVisibility="Disabled" x:Name="ContentContainer"></ScrollViewer>

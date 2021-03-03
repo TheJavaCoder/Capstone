@@ -9,7 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "TestProject\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameSystemObjects", "GameSystemObjects\GameSystemObjects.csproj", "{D2EF7614-036E-42DE-BDD1-CE0426C80D7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Clicker", "WPF_Clicker\WPF_Clicker.csproj", "{7623379C-A5FA-4381-8C87-F6A9E09F3337}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_Clicker", "WPF_Clicker\WPF_Clicker.csproj", "{7623379C-A5FA-4381-8C87-F6A9E09F3337}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D2EF7614-036E-42DE-BDD1-CE0426C80D7A} = {D2EF7614-036E-42DE-BDD1-CE0426C80D7A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

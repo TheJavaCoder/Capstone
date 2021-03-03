@@ -43,10 +43,9 @@ namespace clicker.Controllers
 
             Player p = await GameState.GetPlayer("Test");
 
-            p.lastSeenTime = DateTime.Now;
-
             if (p != null)
             {
+                p.lastSeenTime = DateTime.Now;
                 Console.WriteLine("Success!");
             }
             else {

@@ -1,7 +1,10 @@
-﻿using GameSystemObjects.Players;
+﻿using GameSystemObjects;
+using GameSystemObjects.Players;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,12 +25,27 @@ namespace WPF_Clicker
     public partial class MainWindow : Window
     {
         Player player;
+        HttpClient client;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            client = new HttpClient();
+            client.BaseAddress = new Uri("https://localhost:44339/");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
             PageContainer.Content = new loginPage(this);
+        }
+
+        public async Task<Player> GetPlayerAsync(string pName)
+        {
+            HttpResponseMessage responseMessage = await client.GetAsync("api/player");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                player = await responseMessage.Content.ReadAsAsync<Player>( Formatter.MediaTypeFormatters );
+            }
+            return player;
         }
     }
 }
