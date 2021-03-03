@@ -39,10 +39,10 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
     </Page.Resources>
-    
-    
 
-    <Grid x:Name="globalContainer" Background="#303030">
+
+
+    <Grid x:Name="globalContainer" Background="#3B3B3B">
         <Label x:Name="TaskLabel" HorizontalAlignment="Center" FontSize="25" FontStyle="Normal" Foreground="White" FontWeight="ExtraLight">Task List</Label>
         <Line X1="00" Y1="50" X2="290" Y2="50" HorizontalAlignment="Center" Stroke="white" StrokeThickness="1" SnapsToDevicePixels="True" />
 
@@ -54,8 +54,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="TaskButton" Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" BorderThickness="0 0 1 0" Cursor="Hand">Tasks</Button>
-            <Button Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" Grid.Column="2" BorderThickness="1 0 0 0" Cursor="Hand" Click="Settings_Click">Settings</Button>
+            <Button x:Name="TaskButton" Template="{DynamicResource ButtonTemplate1}" Background="#545454" Foreground="White" BorderThickness="0 0 1 0" Cursor="Hand">Tasks</Button>
+            <Button Template="{DynamicResource ButtonTemplate1}" Background="#3B3B3B" Foreground="White" Grid.Column="2" BorderThickness="1 0 0 0" Cursor="Hand" Click="Settings_Click">Settings</Button>
             
         </Grid>
 

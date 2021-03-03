@@ -27,7 +27,7 @@ namespace clicker.Controllers
             if (p == null)
                 return false;
 
-            bool output = true;
+            bool output = false;
             
             switch(playerItemAction.action)
             {
