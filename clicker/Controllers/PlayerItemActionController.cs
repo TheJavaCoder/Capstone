@@ -22,10 +22,10 @@ namespace clicker.Controllers
         {
             Player p = await GameState.GetPlayer(playerItemAction.player);
 
-            p.lastSeenTime = DateTime.Now;
-
             if (p == null)
                 return false;
+
+            p.lastSeenTime = DateTime.Now;
 
             bool output = false;
             
