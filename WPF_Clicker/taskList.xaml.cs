@@ -34,8 +34,6 @@ namespace WPF_Clicker
             //TaskButton.Background = (Brush) new BrushConverter().ConvertFrom("#616161");
         }
 
-        public async void load() { }
-
         public async Task initData()
         {
             Player p = await window.GetPlayerAsync("Test");
