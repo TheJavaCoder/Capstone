@@ -37,7 +37,7 @@ namespace clicker.Controllers
 
             return p;
         }
-
+        //Logic for LogOut button
         [HttpGet]
         [Route("{playerName}")]
         public async Task<ActionResult<Player>> GetPlayerAsync(string playerName)
