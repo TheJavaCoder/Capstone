@@ -20,15 +20,17 @@ namespace clicker.Controllers
         [HttpPost]
         public async Task<ActionResult<Player>> LoginAsync() 
         {
-            Player p = new Player(new List<ItemTask> 
-            { 
-                new ItemTask 
-                { 
+            Player p = new Player(new List<ItemTask>
+            {
+                new ItemTask
+                {
                     itemName = "testItem",
-                    //enabled = true,
+                    enabled = true,
+                    resourceGatheringLevel = 1,
+                    timeCalc = 60000000,
                 },
 
-            }, "Test");
+            }, "Test"); ;
 
             p.lastSeenTime = DateTime.Now;
 
