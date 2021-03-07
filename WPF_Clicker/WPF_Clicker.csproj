@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="resources\menu.png" />
+    <None Remove="resources\Pick.png" />
+    <None Remove="taskList.xaml~RF11f297b2.TMP" />
+	  
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\GameSystemObjects\GameSystemObjects.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="resources\menu.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="resources\Pick.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
+	</ItemGroup>
+
+</Project>
