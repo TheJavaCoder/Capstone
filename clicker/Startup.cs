@@ -20,6 +20,7 @@ namespace clicker
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            //services.
             services.AddSingleton<IHostedService, Game >();
             services.AddControllers();
         }

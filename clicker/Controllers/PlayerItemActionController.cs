@@ -1,8 +1,10 @@
 ﻿using GameSystemObjects;
+using GameSystemObjects.ControllerModels;
 using GameSystemObjects.Players;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Action = GameSystemObjects.ControllerModels.Action;
 
 namespace clicker.Controllers
 {
@@ -16,16 +18,16 @@ namespace clicker.Controllers
 
         }
 
-        public async Task<ActionResult<bool>> ExcuteActionAsync(PlayerItemAction playerItemAction)
+        public async Task<ActionResult<bool>> ExcuteActionAsync(PlayerItemActionModel playerItemAction)
         {
             Player p = await GameState.GetPlayer(playerItemAction.player);
-
-            p.lastSeenTime = DateTime.Now;
 
             if (p == null)
                 return false;
 
-            bool output = true;
+            p.lastSeenTime = DateTime.Now;
+
+            bool output = false;
             
             switch(playerItemAction.action)
             {
@@ -49,16 +51,5 @@ namespace clicker.Controllers
         }
 
     }
-
-    public enum Action
-    {
-        ENABLE, DISABLE, BUY, SELL, UPGRADE    
-    }
-
-    public class PlayerItemAction
-    {
-        public string player { get; set; }
-        public string item { get; set; }
-        public Action action { get; set; }
-    }
+    
 }

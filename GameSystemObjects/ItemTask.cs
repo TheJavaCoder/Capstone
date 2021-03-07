@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace GameSystemObjects
 {
+    [Serializable]
     public class ItemTask
     {
 
