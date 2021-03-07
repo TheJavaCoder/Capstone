@@ -1,7 +1,7 @@
 USE [DB_111206_clicker]
 GO
 
-/****** Object:  Table [dbo].[Inventory]    Script Date: 3/4/2021 6:28:26 PM ******/
+/****** Object:  Table [dbo].[Inventory]    Script Date: 3/6/2021 9:00:49 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,6 +13,8 @@ CREATE TABLE [dbo].[Inventory](
 	[player_id] [int] NOT NULL,
 	[inventory_item] [int] NOT NULL,
 	[amount] [int] NOT NULL,
+	[resourceGatheringLevel] [int] NOT NULL,
+	[enabled] [tinyint] NOT NULL,
  CONSTRAINT [PK_Inventory] PRIMARY KEY CLUSTERED 
 (
 	[inventory_id] ASC
