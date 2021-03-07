@@ -1,4 +1,6 @@
-﻿using GameSystemObjects.ControllerModels;
+
+using System;
+using GameSystemObjects.ControllerModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,8 +10,16 @@ namespace GameSystemObjects.Players
 {
     class PlayerRepository : IPlayerRepository
     {
+        private string connectionSting = "";
+
+        public PlayerRepository(string c)
+        {
+            connectionSting = c;
+        }
+
         public Task<Player> GetPlayer(string name)
         {
+
             throw new NotImplementedException();
         }
 
