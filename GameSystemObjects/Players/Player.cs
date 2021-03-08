@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ namespace GameSystemObjects.Players
     {
         public string name { get; set; }
 
-        public List<ItemTask> items { get; }
+        [Required]
+        public List<ItemTask> items { get; set; }
 
         public DateTime lastSeenTime { get; set; }
 
@@ -59,7 +61,7 @@ namespace GameSystemObjects.Players
             return true;
         }
 
-        public async Task<List<ItemTask>> GetItems()
+        public List<ItemTask> GetItems()
         {
             return items;
         }
