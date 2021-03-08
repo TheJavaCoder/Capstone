@@ -1,19 +1,13 @@
 ﻿using GameSystemObjects;
 using GameSystemObjects.Players;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WPF_Clicker
 {
@@ -40,7 +34,6 @@ namespace WPF_Clicker
             Player p = await window.GetPlayerAsync("Test");
             if (p != null)
             {
-                SynchronizationContext.Current.Post(_ => TaskLabel.Content = p.name, null);
                 SynchronizationContext.Current.Post(_ => initRender(p), null);
             }
         }
@@ -57,12 +50,16 @@ namespace WPF_Clicker
         {
             // For the rounded corners
             Border b = new Border();
-            b.Name = item.itemName;
+            b.Name = item.itemName.Replace(" ", "");
+
+            DropShadowEffect dropShadowBitmapEffect = new DropShadowEffect();
+            dropShadowBitmapEffect.Opacity = 0.5;
+            b.Effect = dropShadowBitmapEffect;
 
             // Main vertical panel
             StackPanel newItem = new StackPanel();
             newItem.Orientation = Orientation.Vertical;
-            newItem.Name = item.itemName + "Container";
+            newItem.Name = item.itemName.Replace(" ", "") + "Container";
 
             b.Width = window.Width * 0.75;
             b.Margin = new Thickness(0, 20, 0, 20);

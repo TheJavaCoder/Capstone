@@ -25,19 +25,22 @@ namespace clicker.Controllers
             { 
                 new ItemTask 
                 { 
-                    itemName = "testItem",
+                    itemName = "The cat",
+                    taskId = 1,
                     //enabled = true,
                     itemIcon = "https://www.ctvnews.ca/polopoly_fs/1.4692108.1574174140!/httpImage/image.jpg_gen/derivatives/landscape_620/image.jpg",
                 },
                 new ItemTask
                 {
-                    itemName = "testItem",
+                    taskId = 2,
+                    itemName = "Goes",
                     //enabled = true,
                     itemIcon = "https://www.ctvnews.ca/polopoly_fs/1.4692108.1574174140!/httpImage/image.jpg_gen/derivatives/landscape_620/image.jpg",
                 },
                 new ItemTask
                 {
-                    itemName = "testItem",
+                    taskId = 3,
+                    itemName = "Meow",
                     //enabled = true,
                     itemIcon = "https://www.ctvnews.ca/polopoly_fs/1.4692108.1574174140!/httpImage/image.jpg_gen/derivatives/landscape_620/image.jpg",
                 },

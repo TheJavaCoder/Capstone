@@ -8,6 +8,7 @@ namespace GameSystemObjects
     [Serializable]
     public class ItemTask
     {
+        public int taskId { get; set; }
 
         public string itemName { get; set; }
 
