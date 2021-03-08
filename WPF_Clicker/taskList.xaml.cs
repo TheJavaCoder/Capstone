@@ -50,7 +50,6 @@ namespace WPF_Clicker
         {
             // For the rounded corners
             Border b = new Border();
-            b.Name = item.itemName.Replace(" ", "");
 
             DropShadowEffect dropShadowBitmapEffect = new DropShadowEffect();
             dropShadowBitmapEffect.Opacity = 0.5;
@@ -59,12 +58,11 @@ namespace WPF_Clicker
             // Main vertical panel
             StackPanel newItem = new StackPanel();
             newItem.Orientation = Orientation.Vertical;
-            newItem.Name = item.itemName.Replace(" ", "") + "Container";
 
             b.Width = window.Width * 0.75;
             b.Margin = new Thickness(0, 20, 0, 20);
             b.Background = Brushes.White;
-            b.CornerRadius = new CornerRadius(8);
+            b.CornerRadius = new CornerRadius(10);
             b.Padding = new Thickness(8);
             b.Child = newItem;
             
@@ -72,7 +70,7 @@ namespace WPF_Clicker
             Label taskName = new Label();
             taskName.FontSize = 15;
             taskName.Content = item.itemName;
-            taskName.FontWeight = FontWeight.FromOpenTypeWeight(1);
+            taskName.FontWeight = FontWeight.FromOpenTypeWeight(3);
             taskName.HorizontalAlignment = HorizontalAlignment.Center;
             newItem.Children.Add(taskName);
 
@@ -81,9 +79,62 @@ namespace WPF_Clicker
             taskImage.Source = new BitmapImage(new Uri(item.itemIcon));
             newItem.Children.Add(taskImage);
 
+            // Task Amount Labels
+            Label taskAmount = new Label();
+            taskAmount.Content = "Inventory Amount: " + item.itemAmount;
+            taskAmount.Name = item.itemName.Replace(" ", "") + "_Amount";
+            taskAmount.FontWeight = FontWeight.FromOpenTypeWeight(1);
+            newItem.Children.Add(taskAmount);
 
+            Label taskLevel = new Label();
+            taskLevel.Content = "Level: " + item.resourceGatheringLevel;
+            taskLevel.Name = item.itemName.Replace(" ", "") + "_Lvl";
+            taskLevel.FontWeight = FontWeight.FromOpenTypeWeight(1);
+            newItem.Children.Add(taskLevel);
+
+            // Action buttons
+            Grid buttonContainer = new Grid();
+            buttonContainer.Margin = new Thickness(0, 10, 0, 10);
+
+            buttonContainer.ColumnDefinitions.Add(new ColumnDefinition());
+            buttonContainer.ColumnDefinitions.Add(new ColumnDefinition());
+
+            Button startBtn = new Button();
+            startBtn.Content = "Start";
+            startBtn.Click += new RoutedEventHandler(StartBtn_Click);
+            startBtn.Padding = new Thickness(8);
+            startBtn.Template = (ControlTemplate)this.FindResource("ButtonTemplate1");
+            startBtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#545454"));
+            startBtn.Foreground = Brushes.White;
+            startBtn.Cursor = System.Windows.Input.Cursors.Hand;
+            Grid.SetColumn(startBtn, 0);
+
+            Button updateBtn = new Button();
+            updateBtn.Content = "Upgrade";
+            updateBtn.Click += new RoutedEventHandler(UpgradeBtn_Click);
+            updateBtn.Padding = new Thickness(8);
+            updateBtn.Template = (ControlTemplate)this.FindResource("ButtonTemplate1");
+            updateBtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#545454"));
+            updateBtn.Foreground = Brushes.White;
+            updateBtn.Cursor = System.Windows.Input.Cursors.Hand;
+            Grid.SetColumn(updateBtn, 1);
+
+            buttonContainer.Children.Add(startBtn);
+            buttonContainer.Children.Add(updateBtn);
+
+            newItem.Children.Add(buttonContainer);
 
             return b;
+
+        }
+
+        public async void StartBtn_Click(object sender, RoutedEventArgs e)
+        {
+        
+        }
+
+        public async void UpgradeBtn_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 

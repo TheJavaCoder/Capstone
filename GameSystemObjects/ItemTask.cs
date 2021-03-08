@@ -14,9 +14,9 @@ namespace GameSystemObjects
 
         public string itemIcon { get; set; }
 
-        public int resourceGatheringLevel { get; set; }
+        public int resourceGatheringLevel { get; set; } = 1;
 
-        public long itemAmount { get; set; }
+        public long itemAmount { get; set; } = 0;
 
         // the last time an item was gathered
         public long lastStartedTime { get; set; }

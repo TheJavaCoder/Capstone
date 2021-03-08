@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPF_Clicker"
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
-        Title="MainWindow" Height="400" Width="330"  Background="#3B3B3B">
+        Title="MainWindow" Height="400" Width="330"  Background="#3B3B3B" TextOptions.TextFormattingMode="Display">
 
     <Grid>
         <Frame x:Name="PageContainer"></Frame>
