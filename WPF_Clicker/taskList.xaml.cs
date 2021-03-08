@@ -19,6 +19,8 @@ namespace WPF_Clicker
 
         private MainWindow window;
 
+        private string CurrentTask = "";
+
         public taskList(MainWindow w)
         {
             InitializeComponent();
@@ -60,7 +62,7 @@ namespace WPF_Clicker
             newItem.Orientation = Orientation.Vertical;
 
             b.Width = window.Width * 0.75;
-            b.Margin = new Thickness(0, 20, 0, 20);
+            b.Margin = new Thickness(0, 20, -8, 20);
             b.Background = Brushes.White;
             b.CornerRadius = new CornerRadius(10);
             b.Padding = new Thickness(8);
@@ -94,7 +96,7 @@ namespace WPF_Clicker
 
             // Action buttons
             Grid buttonContainer = new Grid();
-            buttonContainer.Margin = new Thickness(0, 10, 0, 10);
+            buttonContainer.Margin = new Thickness(-8, 10, -8, -8);
 
             buttonContainer.ColumnDefinitions.Add(new ColumnDefinition());
             buttonContainer.ColumnDefinitions.Add(new ColumnDefinition());
@@ -130,7 +132,17 @@ namespace WPF_Clicker
 
         public async void StartBtn_Click(object sender, RoutedEventArgs e)
         {
-        
+            this.CurrentTask = (e.Source as Button).Name;
+            var parent = (StackPanel)((e.Source as Button).Parent as Grid).Parent;
+
+            ProgressBar pb = new ProgressBar();
+            pb.Minimum = 0;
+            pb.Maximum = 100;
+            pb.Value = 50;
+            pb.Height = 10;
+            pb.Margin = new Thickness(-8, 8, -8, -8);
+
+            parent.Children.Add(pb);
         }
 
         public async void UpgradeBtn_Click(object sender, RoutedEventArgs e)
@@ -147,5 +159,6 @@ namespace WPF_Clicker
         {
             await initData();
         }
+
     }
 }

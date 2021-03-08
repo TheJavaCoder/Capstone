@@ -29,6 +29,7 @@ namespace clicker.Controllers
                     taskId = 1,
                     //enabled = true,
                     itemIcon = "https://www.ctvnews.ca/polopoly_fs/1.4692108.1574174140!/httpImage/image.jpg_gen/derivatives/landscape_620/image.jpg",
+                    itemAmount = 99999,
                 },
                 new ItemTask
                 {
