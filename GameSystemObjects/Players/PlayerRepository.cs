@@ -1,6 +1,9 @@
-﻿using GameSystemObjects.ControllerModels;
+﻿using Dapper;
+using GameSystemObjects.ControllerModels;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,9 +11,19 @@ namespace GameSystemObjects.Players
 {
     class PlayerRepository : IPlayerRepository
     {
-        public Task<Player> GetPlayer(string name)
+
+        public PlayerRepository(String conString)
         {
-            throw new NotImplementedException();
+            m_connectionString = conString;
+        }
+
+        public async Task<Player> GetPlayer(string name)
+        {
+            using (var c = new SqlConnection(m_connectionString))
+            {
+                var players = await c.QueryAsync<Player>("storedprocedure-name", param: new { name }, commandType: System.Data.CommandType.StoredProcedure);
+                return players.SingleOrDefault();
+            }
         }
 
         public bool loginPlayer(PlayerLoginModel playerLoginModel)
@@ -22,5 +35,7 @@ namespace GameSystemObjects.Players
         {
             throw new NotImplementedException();
         }
+
+        private String m_connectionString;
     }
 }
