@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,6 +21,7 @@ namespace clicker.Controllers
         [HttpPost]
         public async Task<ActionResult<Player>> LoginAsync(PlayerLoginModel playerLoginModel) 
         {
+
             Player p = new Player(new List<ItemTask> 
             { 
                 new ItemTask 
@@ -47,8 +48,17 @@ namespace clicker.Controllers
                     //enabled = true,
                     itemIcon = "https://www.ctvnews.ca/polopoly_fs/1.4692108.1574174140!/httpImage/image.jpg_gen/derivatives/landscape_620/image.jpg",
                     timeCalc = 60000,
-                },
 
+            Player p = new Player(new List<ItemTask>
+            {
+                new ItemTask
+                {
+                    itemName = "testItem",
+                    enabled = true,
+                    resourceGatheringLevel = 1,
+                    timeCalc = 60000000,
+
+                },
             }, playerLoginModel.name);
 
             p.lastSeenTime = DateTime.Now;
@@ -76,6 +86,17 @@ namespace clicker.Controllers
 
             return p;
         }
+
+        // [HttpPut]
+        //public async Task<ActionResult<bool>> SaveAndRemove()
+        //{
+
+        //    Player p;
+        //    GameState.current.players.TryRemove(p.name, out p);
+        //    await m_PlayerRepository.SavePlayer(p);
+
+        //    return true;
+        //}
 
         IPlayerRepository m_PlayerRepository;
 
