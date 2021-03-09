@@ -36,9 +36,9 @@ namespace clicker.Controllers
                 new ItemTask
                 {
                     taskId = 2,
-                    itemName = "Goes",
+                    itemName = "Mine Stone",
                     //enabled = true,
-                    itemIcon = "https://www.ctvnews.ca/polopoly_fs/1.4692108.1574174140!/httpImage/image.jpg_gen/derivatives/landscape_620/image.jpg",
+                    itemIcon = "https://localhost:44339/images/rockTex.png",
                     timeCalc = 60000,
                 },
                 new ItemTask
