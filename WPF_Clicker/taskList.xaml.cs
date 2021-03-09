@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 
@@ -20,23 +21,22 @@ namespace WPF_Clicker
         private MainWindow window;
 
         private string CurrentTask = "";
+        private StackPanel currentTaskPanel;
+
+        private Player player;
 
         public taskList(MainWindow w)
         {
             InitializeComponent();
             window = w;
-
-            
-
-            //TaskButton.Background = (Brush) new BrushConverter().ConvertFrom("#616161");
         }
 
         public async Task initData()
         {
-            Player p = await window.GetPlayerAsync("Test");
-            if (p != null)
+            player = await window.GetPlayerAsync("Test");
+            if (player != null)
             {
-                SynchronizationContext.Current.Post(_ => initRender(p), null);
+                SynchronizationContext.Current.Post(_ => initRender(player), null);
             }
         }
 
@@ -103,7 +103,9 @@ namespace WPF_Clicker
 
             Button startBtn = new Button();
             startBtn.Content = "Start";
+            startBtn.ToolTip = "Begin the task";
             startBtn.Click += new RoutedEventHandler(StartBtn_Click);
+            startBtn.Name = item.itemName.Replace(" ", "");
             startBtn.Padding = new Thickness(8);
             startBtn.Template = (ControlTemplate)this.FindResource("ButtonTemplate1");
             startBtn.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#545454"));
@@ -113,6 +115,7 @@ namespace WPF_Clicker
 
             Button updateBtn = new Button();
             updateBtn.Content = "Upgrade";
+            updateBtn.ToolTip = "Locked";
             updateBtn.Click += new RoutedEventHandler(UpgradeBtn_Click);
             updateBtn.Padding = new Thickness(8);
             updateBtn.Template = (ControlTemplate)this.FindResource("ButtonTemplate1");
@@ -130,17 +133,35 @@ namespace WPF_Clicker
 
         }
 
-        public async void StartBtn_Click(object sender, RoutedEventArgs e)
+        public void StartBtn_Click(object sender, RoutedEventArgs e)
         {
+            // Stop the previous progress bar
+            
+            if (currentTaskPanel != null)
+            {
+                currentTaskPanel.Children.RemoveAt(currentTaskPanel.Children.Count - 1);
+            }
+
+            // Start the current Progress bar and send the request off to the server
             this.CurrentTask = (e.Source as Button).Name;
+
             var parent = (StackPanel)((e.Source as Button).Parent as Grid).Parent;
+            this.currentTaskPanel = parent;
 
             ProgressBar pb = new ProgressBar();
+            pb.Name = this.CurrentTask + "_pb";
+            pb.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#3B3B3B"));
+            pb.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#616161"));
             pb.Minimum = 0;
-            pb.Maximum = 100;
-            pb.Value = 50;
+            pb.Maximum = player.getItem(this.CurrentTask).timeCalc;
+            pb.Value = 0;
             pb.Height = 10;
             pb.Margin = new Thickness(-8, 8, -8, -8);
+
+            Duration d = new Duration( TimeSpan.FromMilliseconds( player.getItem(CurrentTask).timeCalc ));
+            DoubleAnimation da = new DoubleAnimation(player.getItem(this.CurrentTask).timeCalc, d);
+            da.RepeatBehavior = RepeatBehavior.Forever;
+            pb.BeginAnimation(ProgressBar.ValueProperty , da);
 
             parent.Children.Add(pb);
         }
@@ -150,9 +171,9 @@ namespace WPF_Clicker
 
         }
 
-        private async void Settings_Click(object sender, RoutedEventArgs e)
+        private void Settings_Click(object sender, RoutedEventArgs e)
         {
-            window.Content = new Settings(window);
+            window.Navigate(new Settings(window));
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)

@@ -22,7 +22,7 @@ namespace WPF_Clicker
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : NavigationWindow
     {
         Player player;
         HttpClient client;
@@ -35,7 +35,7 @@ namespace WPF_Clicker
             client.BaseAddress = new Uri("https://localhost:44339/");
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            PageContainer.Content = new loginPage(this);
+            this.Content = new loginPage(this);
         }
 
         public async Task<Player> GetPlayerAsync(string pName)

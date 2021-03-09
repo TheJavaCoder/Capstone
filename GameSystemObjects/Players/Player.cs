@@ -68,7 +68,7 @@ namespace GameSystemObjects.Players
 
         public ItemTask getItem(string name)
         {
-            return items.Where(i => i.itemName == name).FirstOrDefault();
+            return items.Where(i => i.itemName.Replace(" ", "") == name.Replace(" ", "")).FirstOrDefault();
         }
 
         public ItemTask getEnabledTask()

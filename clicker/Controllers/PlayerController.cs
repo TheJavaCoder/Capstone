@@ -30,6 +30,7 @@ namespace clicker.Controllers
                     //enabled = true,
                     itemIcon = "https://www.ctvnews.ca/polopoly_fs/1.4692108.1574174140!/httpImage/image.jpg_gen/derivatives/landscape_620/image.jpg",
                     itemAmount = 99999,
+                    timeCalc = 500,
                 },
                 new ItemTask
                 {
@@ -37,6 +38,7 @@ namespace clicker.Controllers
                     itemName = "Goes",
                     //enabled = true,
                     itemIcon = "https://www.ctvnews.ca/polopoly_fs/1.4692108.1574174140!/httpImage/image.jpg_gen/derivatives/landscape_620/image.jpg",
+                    timeCalc = 60000,
                 },
                 new ItemTask
                 {
@@ -44,6 +46,7 @@ namespace clicker.Controllers
                     itemName = "Meow",
                     //enabled = true,
                     itemIcon = "https://www.ctvnews.ca/polopoly_fs/1.4692108.1574174140!/httpImage/image.jpg_gen/derivatives/landscape_620/image.jpg",
+                    timeCalc = 60000,
                 },
 
             }, playerLoginModel.name);

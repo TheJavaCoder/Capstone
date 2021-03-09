@@ -28,7 +28,7 @@ namespace WPF_Clicker
 
         private void TaskButton_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.Content = new taskList(mainWindow);
+            mainWindow.GoBack();
         }
     }
 }

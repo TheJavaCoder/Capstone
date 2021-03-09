@@ -22,7 +22,7 @@ namespace GameSystemObjects
         public long lastStartedTime { get; set; }
 
         // the time it takes an item to be gathered
-        public string timeCalc { get; set; }
+        public long timeCalc { get; set; }
 
         public bool enabled { get; set; }
 
