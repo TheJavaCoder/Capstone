@@ -26,19 +26,6 @@ namespace GameSystemObjects.Players
                 var players = await c.QueryAsync<Player>("storedprocedure-name", param: new { name }, commandType: System.Data.CommandType.StoredProcedure);
                 return players.SingleOrDefault();
             }
-
-        private string connectionSting = "";
-
-        public PlayerRepository(string c)
-        {
-            connectionSting = c;
-        }
-
-        public Task<Player> GetPlayer(string name)
-        {
-
-            throw new NotImplementedException();
-
         }
 
         public bool loginPlayer(PlayerLoginModel playerLoginModel)
