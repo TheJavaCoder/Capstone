@@ -22,8 +22,8 @@ namespace WPF_Clicker
 
         private string CurrentTask = "";
         private StackPanel currentTaskPanel;
-
         private Player player;
+        private bool loaded = false;
 
         public taskList(MainWindow w)
         {
@@ -178,7 +178,11 @@ namespace WPF_Clicker
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            await initData();
+            if (!loaded)
+            {
+                await initData();
+                loaded = true;
+            }
         }
 
     }
