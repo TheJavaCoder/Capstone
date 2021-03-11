@@ -9,7 +9,7 @@ namespace GameSystemObjects
 {
     public class GameLoop
     {
-        public void run()
+        public async void run()
         {
 
             while (true)
@@ -34,7 +34,7 @@ namespace GameSystemObjects
                 }
 
                 // Game loop every 1/30th of a second.
-                Thread.Sleep(33);
+                await Task.Delay(33);
             }
 
         }
