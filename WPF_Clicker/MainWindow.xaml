@@ -1,4 +1,6 @@
-﻿<Window x:Class="WPF_Clicker.MainWindow"
+﻿
+    
+    <NavigationWindow x:Class="WPF_Clicker.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,10 +8,9 @@
         xmlns:local="clr-namespace:WPF_Clicker"
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
-        Title="MainWindow" Height="400" Width="330"  Background="#3B3B3B">
+        Title="MainWindow" Height="400" Width="330"  Background="#3B3B3B" TextOptions.TextFormattingMode="Display" ResizeMode="NoResize" ShowsNavigationUI="False">
 
-    <Grid>
-        <Frame x:Name="PageContainer"></Frame>
-    </Grid>
 
-</Window>
+    
+
+</NavigationWindow>

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using GameSystemObjects;
+using GameSystemObjects.ControllerModels;
+using GameSystemObjects.Players;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GameSystemObjects;
-using GameSystemObjects.Players;
-using GameSystemObjects.ControllerModels;
 
 namespace clicker.Controllers
 {
@@ -19,18 +19,38 @@ namespace clicker.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Player>> LoginAsync(PlayerLoginModel playerLoginModel) 
+        public async Task<ActionResult<Player>> LoginAsync(PlayerLoginModel playerLoginModel)
         {
+
             Player p = new Player(new List<ItemTask>
             {
                 new ItemTask
                 {
-                    itemName = "testItem",
-                    enabled = true,
-                    resourceGatheringLevel = 1,
-                    timeCalc = 60000000,
+                    itemName = "Collect Wood",
+                    taskId = 1,
+                    //enabled = true,
+                    itemIcon = "https://localhost:44339/images/woodTex.png",
+                    itemAmount = 99999,
+                    timeCalc = 500,
                 },
-            }, playerLoginModel.name);
+                new ItemTask
+                {
+                    taskId = 2,
+                    itemName = "Mine Stone",
+                    //enabled = true,
+                    itemIcon = "https://localhost:44339/images/rockTex.png",
+                    timeCalc = 60000,
+                },
+                new ItemTask
+                {
+                    taskId = 3,
+                    itemName = "Meow",
+                    //enabled = true,
+                    itemIcon = "https://www.ctvnews.ca/polopoly_fs/1.4692108.1574174140!/httpImage/image.jpg_gen/derivatives/landscape_620/image.jpg",
+                    timeCalc = 60000,
+
+                }
+            }, playerLoginModel.username);
 
             p.lastSeenTime = DateTime.Now;
 
@@ -51,7 +71,8 @@ namespace clicker.Controllers
                 p.lastSeenTime = DateTime.Now;
                 Console.WriteLine("Success!");
             }
-            else {
+            else
+            {
                 Console.WriteLine("Player was null");
             }
 

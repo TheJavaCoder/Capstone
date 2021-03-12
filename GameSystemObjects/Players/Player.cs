@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GameSystemObjects.Players
@@ -11,13 +11,14 @@ namespace GameSystemObjects.Players
     {
         public string name { get; set; }
 
-        public List<ItemTask> items { get; }
+        [Required]
+        public List<ItemTask> items { get; set; }
 
         public DateTime lastSeenTime { get; set; }
 
         public Player()
         {
-        
+
         }
 
         public Player(string name)
@@ -40,7 +41,7 @@ namespace GameSystemObjects.Players
             if (foundItem == null)
                 return;
 
-            if (foundItem.lastStartedTime == null || foundItem.lastStartedTime == 0) 
+            if (foundItem.lastStartedTime == null || foundItem.lastStartedTime == 0)
             {
                 foundItem.lastStartedTime = DateTime.Now.Ticks;
                 return;
@@ -70,14 +71,14 @@ namespace GameSystemObjects.Players
             return true;
         }
 
-        public async Task<List<ItemTask>> GetItems()
+        public List<ItemTask> GetItems()
         {
             return items;
         }
 
         public ItemTask getItem(string name)
         {
-            return items.Where(i => i.itemName == name).FirstOrDefault();
+            return items.Where(i => i.itemName.Replace(" ", "") == name.Replace(" ", "")).FirstOrDefault();
         }
 
         public ItemTask getEnabledTask()

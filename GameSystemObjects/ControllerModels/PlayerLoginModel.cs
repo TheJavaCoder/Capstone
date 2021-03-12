@@ -1,12 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel;
 
 namespace GameSystemObjects.ControllerModels
 {
+    
     public class PlayerLoginModel
     {
-        public string name { get; set; }
+        [Description("player_ID")]
+        public int player_ID { get; set; }
+        [Description("username")]
+        public string username { get; set; }
+        [Description("password")]
         public string password { get; set; }
     }
 }
