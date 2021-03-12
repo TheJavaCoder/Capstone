@@ -31,17 +31,8 @@ namespace GameSystemObjects.Players
         {
             using (var c = new SqlConnection(m_connectionString))
             {
-
-                //var players = await c.QueryAsync<PlayerLoginModel>(sql: "spSELECT_dbo_Player_With_Params", param: new { username = playerLoginModel.username }, commandType: CommandType.StoredProcedure);
-                //var players =  c.Query<PlayerLoginModel>(string.Format("Select * FROM dbo.Player WHERE username = '{0}'", playerLoginModel.username));
-
-                var players = await c.QueryAsync<PlayerLoginModel>(
-                    sql: @"SELECT * FROM DBO.PLAYER WHERE username = @username",
-                    param: new { playerLoginModel.username }
-                    );
-
-                var player = players.SingleOrDefault();
-
+                var player = await c.QuerySingleOrDefaultAsync<PlayerLoginModel>(sql: "spSELECT_dbo_Player_With_Params", param: new { username = playerLoginModel.username }, commandType: CommandType.StoredProcedure);
+                
                 if (player == null || playerLoginModel.password != player.password)
                     return false;
 
