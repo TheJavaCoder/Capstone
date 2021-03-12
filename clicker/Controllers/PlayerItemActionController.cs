@@ -28,8 +28,8 @@ namespace clicker.Controllers
             p.lastSeenTime = DateTime.Now;
 
             bool output = false;
-            
-            switch(playerItemAction.action)
+
+            switch (playerItemAction.action)
             {
                 case Action.ENABLE:
                     output = await p.switchEnabledTask(playerItemAction.item);
@@ -51,5 +51,5 @@ namespace clicker.Controllers
         }
 
     }
-    
+
 }

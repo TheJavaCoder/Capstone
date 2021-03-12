@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameSystemObjects.ControllerModels
+﻿namespace GameSystemObjects.ControllerModels
 {
     public enum Action
     {
@@ -10,7 +6,7 @@ namespace GameSystemObjects.ControllerModels
     }
 
     public class PlayerItemActionModel
-    { 
+    {
         public string player { get; set; }
         public string item { get; set; }
         public Action action { get; set; }

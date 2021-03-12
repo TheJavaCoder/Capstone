@@ -2,14 +2,13 @@
 using GameSystemObjects.Players;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace TestProject
 {
     class PlayerTest
     {
 
-        public PlayerTest() 
+        public PlayerTest()
         {
             Console.WriteLine("---- Player Unit Tests! ----");
 
@@ -42,7 +41,7 @@ namespace TestProject
                 new ItemTask { itemName = "Test", itemAmount = 0, resourceGatheringLevel = 1, },
 
             }, "MyName");
-            bool returned = await p.UpgradeGatheringLevel("Test", 2);
+            bool returned = await p.UpgradeGatheringLevel("Test");
 
             if (returned && p.getItem("Test").resourceGatheringLevel == 2)
                 Console.WriteLine("testUpgradeGatheringLevel - Success");
@@ -55,7 +54,7 @@ namespace TestProject
                 new ItemTask { itemName = "Test", itemAmount = 0, resourceGatheringLevel = 4},
 
             }, "MyName");
-            bool returned = await p.UpgradeGatheringLevel("Test", 1);
+            bool returned = await p.UpgradeGatheringLevel("Test");
 
             if (!returned && p.getItem("Test").resourceGatheringLevel == 4)
                 Console.WriteLine("testNegativeUpgradeGatheringLevel - Success");

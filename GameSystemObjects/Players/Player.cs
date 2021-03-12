@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GameSystemObjects.Players
@@ -19,7 +18,7 @@ namespace GameSystemObjects.Players
 
         public Player()
         {
-        
+
         }
 
         public Player(string name)
@@ -42,7 +41,7 @@ namespace GameSystemObjects.Players
             if (foundItem == null)
                 return;
 
-            if (foundItem.lastStartedTime == null || foundItem.lastStartedTime == 0) 
+            if (foundItem.lastStartedTime == null || foundItem.lastStartedTime == 0)
             {
                 foundItem.lastStartedTime = DateTime.Now.Ticks;
                 return;

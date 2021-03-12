@@ -28,7 +28,7 @@ namespace GameSystemObjects
                         ItemTask currentTask = p.getEnabledTask();
 
                         // Increment that Item
-                        if(currentTask != null)
+                        if (currentTask != null)
                             p.IncrementItem(currentTask.itemName);
                     }
                 }
@@ -71,7 +71,7 @@ namespace GameSystemObjects
                 Thread.Sleep(30000);
             }
 
-        }   
+        }
     }
 
     public class CleanUpSessions
@@ -98,7 +98,7 @@ namespace GameSystemObjects
                         if (p.lastSeenTime.AddMinutes(1) < DateTime.Now)
                         {
                             playerRepository.SavePlayer(p);
-                            GameState.current.players.TryRemove(p.name, out _); 
+                            GameState.current.players.TryRemove(p.name, out _);
                         }
                     }
                 }
@@ -121,12 +121,15 @@ namespace GameSystemObjects
         Thread saveThread;
         Thread cleanUpSessions;
 
+        public Game() { }
+
         // Passing in the repository instance
         public Game(IServiceProvider serviceCollection)
         {
             // Commented out as this doesn't exist yet.
             //playerRepository = serviceCollection.GetRequiredService<IPlayerRepository>();
         }
+
 
         // Building both threads.
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -151,12 +154,12 @@ namespace GameSystemObjects
     }
 
     // This is a static cache object.
-    public class GameState 
+    public class GameState
     {
         // The current static gamestate object Called by: GameState.current
         public static GameState current { get; set; }
 
-        static GameState() 
+        static GameState()
         {
             //Init
             current = new GameState { players = new ConcurrentDictionary<string, Player>(), };

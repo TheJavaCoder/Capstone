@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_Clicker", "WPF_Clicker\
 		{D2EF7614-036E-42DE-BDD1-CE0426C80D7A} = {D2EF7614-036E-42DE-BDD1-CE0426C80D7A}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameSystemObjectsTest", "GameSystemObjectsTest\GameSystemObjectsTest.csproj", "{DE953872-23B3-47A6-95A1-B6E457834C8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{7623379C-A5FA-4381-8C87-F6A9E09F3337}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7623379C-A5FA-4381-8C87-F6A9E09F3337}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7623379C-A5FA-4381-8C87-F6A9E09F3337}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE953872-23B3-47A6-95A1-B6E457834C8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE953872-23B3-47A6-95A1-B6E457834C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE953872-23B3-47A6-95A1-B6E457834C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE953872-23B3-47A6-95A1-B6E457834C8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

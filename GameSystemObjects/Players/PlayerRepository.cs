@@ -1,17 +1,16 @@
 
 using Dapper;
-using System;
 using GameSystemObjects.ControllerModels;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GameSystemObjects.Players
 {
-    class PlayerRepository : IPlayerRepository
+    public class PlayerRepository : IPlayerRepository
     {
 
         public PlayerRepository(String conString)
@@ -28,9 +27,26 @@ namespace GameSystemObjects.Players
             }
         }
 
-        public bool loginPlayer(PlayerLoginModel playerLoginModel)
+        public async Task<bool> loginPlayer(PlayerLoginModel playerLoginModel)
         {
-            throw new NotImplementedException();
+            using (var c = new SqlConnection(m_connectionString))
+            {
+
+                //var players = await c.QueryAsync<PlayerLoginModel>(sql: "spSELECT_dbo_Player_With_Params", param: new { username = playerLoginModel.username }, commandType: CommandType.StoredProcedure);
+                //var players =  c.Query<PlayerLoginModel>(string.Format("Select * FROM dbo.Player WHERE username = '{0}'", playerLoginModel.username));
+
+                var players = await c.QueryAsync<PlayerLoginModel>(
+                    sql: @"SELECT * FROM DBO.PLAYER WHERE username = @username",
+                    param: new { playerLoginModel.username }
+                    );
+
+                var player = players.SingleOrDefault();
+
+                if (player == null || playerLoginModel.password != player.password)
+                    return false;
+
+                return true;
+            }
         }
 
         public Task SavePlayer(Player p)

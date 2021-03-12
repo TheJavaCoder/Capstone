@@ -42,7 +42,7 @@ namespace WPF_Clicker
 
         public void initRender(Player p)
         {
-            foreach(ItemTask item in p.GetItems())
+            foreach (ItemTask item in p.GetItems())
             {
                 ContentContainer.Children.Add(CreateItemTask(item));
             }
@@ -67,7 +67,7 @@ namespace WPF_Clicker
             b.CornerRadius = new CornerRadius(10);
             b.Padding = new Thickness(8);
             b.Child = newItem;
-            
+
             // Task Name
             Label taskName = new Label();
             taskName.FontSize = 15;
@@ -136,7 +136,7 @@ namespace WPF_Clicker
         public void StartBtn_Click(object sender, RoutedEventArgs e)
         {
             // Stop the previous progress bar
-            
+
             if (currentTaskPanel != null)
             {
                 currentTaskPanel.Children.RemoveAt(currentTaskPanel.Children.Count - 1);
@@ -158,10 +158,10 @@ namespace WPF_Clicker
             pb.Height = 10;
             pb.Margin = new Thickness(-8, 8, -8, -8);
 
-            Duration d = new Duration( TimeSpan.FromMilliseconds( player.getItem(CurrentTask).timeCalc ));
+            Duration d = new Duration(TimeSpan.FromMilliseconds(player.getItem(CurrentTask).timeCalc));
             DoubleAnimation da = new DoubleAnimation(player.getItem(this.CurrentTask).timeCalc, d);
             da.RepeatBehavior = RepeatBehavior.Forever;
-            pb.BeginAnimation(ProgressBar.ValueProperty , da);
+            pb.BeginAnimation(ProgressBar.ValueProperty, da);
 
             parent.Children.Add(pb);
         }

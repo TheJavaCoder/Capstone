@@ -1,10 +1,10 @@
+using GameSystemObjects;
+using GameSystemObjects.ControllerModels;
+using GameSystemObjects.Players;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GameSystemObjects;
-using GameSystemObjects.Players;
-using GameSystemObjects.ControllerModels;
 
 namespace clicker.Controllers
 {
@@ -19,13 +19,13 @@ namespace clicker.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Player>> LoginAsync(PlayerLoginModel playerLoginModel) 
+        public async Task<ActionResult<Player>> LoginAsync(PlayerLoginModel playerLoginModel)
         {
 
-            Player p = new Player(new List<ItemTask> 
-            { 
-                new ItemTask 
-                { 
+            Player p = new Player(new List<ItemTask>
+            {
+                new ItemTask
+                {
                     itemName = "Collect Wood",
                     taskId = 1,
                     //enabled = true,
@@ -50,7 +50,7 @@ namespace clicker.Controllers
                     timeCalc = 60000,
 
                 }
-            }, playerLoginModel.name);
+            }, playerLoginModel.username);
 
             p.lastSeenTime = DateTime.Now;
 
@@ -71,7 +71,8 @@ namespace clicker.Controllers
                 p.lastSeenTime = DateTime.Now;
                 Console.WriteLine("Success!");
             }
-            else {
+            else
+            {
                 Console.WriteLine("Player was null");
             }
 

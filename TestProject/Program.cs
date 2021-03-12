@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using GameSystemObjects;
-
-namespace TestProject
+﻿namespace TestProject
 {
     class Program
     {
@@ -11,7 +7,7 @@ namespace TestProject
         {
 
             new PlayerTest();
-
+            new DatabaseTest();
         }
 
     }
