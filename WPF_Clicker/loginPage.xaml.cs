@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using GameSystemObjects.ControllerModels;
 
 namespace WPF_Clicker
 {
@@ -18,6 +19,11 @@ namespace WPF_Clicker
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            PlayerLoginModel plm = new PlayerLoginModel
+            {
+                username = Username.Text,
+                password = Password.Text
+            };
 
             window.Content = new taskList(window);
         }

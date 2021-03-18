@@ -10,5 +10,7 @@ namespace GameSystemObjects.Players
         public Task<Player> GetPlayer(string name);
         public Task SavePlayer(Player p);
 
+        public Task<int> CreatePlayer(PlayerLoginModel p);
+
     }
 }

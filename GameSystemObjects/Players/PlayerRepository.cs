@@ -27,22 +27,43 @@ namespace GameSystemObjects.Players
             }
         }
 
+        public Task SavePlayer(Player p)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> loginPlayer(PlayerLoginModel playerLoginModel)
         {
             using (var c = new SqlConnection(m_connectionString))
             {
                 var player = await c.QuerySingleOrDefaultAsync<PlayerLoginModel>(sql: "spSELECT_dbo_Player_With_Params", param: new { username = playerLoginModel.username }, commandType: CommandType.StoredProcedure);
-                
-                if (player == null || playerLoginModel.password != player.password)
-                    return false;
 
+                if (player == null)
+                {
+                    var p = new Player
+                    {
+                        name = playerLoginModel.username,
+                        items = new List<ItemTask>()
+                    };
+                    await CreatePlayer(playerLoginModel);
+                    return true;
+                }
+
+                if (playerLoginModel.password != player.password)
+                {
+                    return false;
+                }
+                
                 return true;
             }
         }
 
-        public Task SavePlayer(Player p)
+        public async Task<int> CreatePlayer(PlayerLoginModel p)
         {
-            throw new NotImplementedException();
+            using (var c = new SqlConnection(m_connectionString))
+            {
+                return await c.QueryFirstOrDefaultAsync<int>("spINSERT_dbo_Player", param: new { p.username, p.password }, commandType: System.Data.CommandType.StoredProcedure);
+            }
         }
 
         private String m_connectionString;
