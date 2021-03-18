@@ -58,8 +58,19 @@
 
             <Button x:Name="TaskButton" Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" BorderThickness="0 0 1 0" Cursor="Hand" Click="TaskButton_Click" Content="{StaticResource pick}"></Button>
             <Button Template="{DynamicResource ButtonTemplate1}" Background="#545454" Foreground="White" Grid.Column="2" BorderThickness="1 0 0 0" Cursor="Hand" Content="{StaticResource hamburger}"></Button>
-
         </Grid>
 
-    </Grid>
+
+
+
+
+
+        <StackPanel Margin="70,130,70,0">
+         
+            <Button Margin="0,280,0,0" Width="100" Click="Button_Click">
+                Sign Out
+            </Button>
+
+        </StackPanel>
+        </Grid>
 </Page>
