@@ -24,11 +24,17 @@ namespace WPF_Clicker
         private StackPanel currentTaskPanel;
         private Player player;
         private bool loaded = false;
+        private object window1;
 
         public taskList(MainWindow w)
         {
             InitializeComponent();
             window = w;
+        }
+
+        public taskList(object window1)
+        {
+            this.window1 = window1;
         }
 
         public async Task initData()
