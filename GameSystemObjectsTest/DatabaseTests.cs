@@ -17,6 +17,20 @@ namespace GameSystemObjectsTest
         }
 
         [Fact]
+        public async Task createPlayer()
+        {
+            var testLogin = new PlayerLoginModel
+            {
+                username = "Sue",
+                password = "Test",
+            };
+
+            var result = await m_playerRepository.CreatePlayer(testLogin);
+            result.Should().Be(0);
+        }
+
+
+        [Fact]
         public async Task attemptLogin()
         {
             var testLogin = new PlayerLoginModel

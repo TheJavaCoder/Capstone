@@ -10,12 +10,12 @@
 
     <Grid>
         <StackPanel Margin="70,130,70,0">
-            <TextBox Name="Username" TextAlignment="Center" Padding="5" Margin="0,10,0,0">
-                Username
+            <Label Foreground="White">Username:</Label>
+            <TextBox x:Name="Username" TextAlignment="Center" Padding="5" Margin="0,0,0,0">
             </TextBox>
 
-            <TextBox Name="Password" TextAlignment="Center" Padding="5" Margin="0,10,0,0">
-                Password
+            <Label Foreground="White">Password:</Label>
+            <TextBox x:Name="Password" TextAlignment="Center" Padding="5" Margin="0,0,0,0">
             </TextBox>
 
             <Button Margin="70,30,0,0" Width="100" Click="Button_Click">
