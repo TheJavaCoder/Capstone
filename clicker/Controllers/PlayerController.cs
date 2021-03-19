@@ -58,7 +58,7 @@ namespace clicker.Controllers
 
             return p;
         }
-        //Logic for LogOut button
+        
         [HttpGet]
         [Route("{playerName}")]
         public async Task<ActionResult<Player>> GetPlayerAsync(string playerName)
@@ -79,16 +79,16 @@ namespace clicker.Controllers
             return p;
         }
 
-        // [HttpPut]
-        //public async Task<ActionResult<bool>> SaveAndRemove()
-        //{
+         [HttpPut]
+        public async Task<ActionResult<bool>> SaveAndRemove(String name)
+        {
 
-        //    Player p;
-        //    GameState.current.players.TryRemove(p.name, out p);
-        //    await m_PlayerRepository.SavePlayer(p);
+            Player p;
+            GameState.current.players.TryRemove(name, out p);
+            await m_PlayerRepository.SavePlayer(p);
 
-        //    return true;
-        //}
+            return true;
+        }
 
         IPlayerRepository m_PlayerRepository;
 
