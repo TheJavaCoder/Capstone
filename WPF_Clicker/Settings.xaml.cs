@@ -21,6 +21,10 @@ namespace WPF_Clicker
             settingsWindow.GoBack();
         }
 
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            await settingsWindow.LogoutPlayerAsync();
+        }
     }
 }
 

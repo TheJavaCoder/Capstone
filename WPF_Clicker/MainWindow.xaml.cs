@@ -1,5 +1,6 @@
 ﻿using GameSystemObjects;
 using GameSystemObjects.Players;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -35,6 +36,25 @@ namespace WPF_Clicker
                 player = await responseMessage.Content.ReadAsAsync<Player>(Formatter.MediaTypeFormatters);
             }
             return player;
+        }
+
+
+
+
+        public async Task<bool> LogoutPlayerAsync()
+        {
+            var json = JsonConvert.SerializeObject(player.name);
+
+
+            HttpContent content = new StringContent(json);
+
+
+            HttpResponseMessage responseMessage = await client.PutAsync("api/player/" + player.name, content);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
