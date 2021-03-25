@@ -1,9 +1,7 @@
 using GameSystemObjects;
-using GameSystemObjects.Configuration;
 using GameSystemObjects.ControllerModels;
 using GameSystemObjects.Players;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
