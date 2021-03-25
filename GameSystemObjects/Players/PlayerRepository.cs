@@ -1,6 +1,8 @@
 
 using Dapper;
+using GameSystemObjects.Configuration;
 using GameSystemObjects.ControllerModels;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,6 +14,11 @@ namespace GameSystemObjects.Players
 {
     public class PlayerRepository : IPlayerRepository
     {
+
+        public PlayerRepository(IOptions<CommonConfiguration> options)
+        {
+            m_connectionString = options.Value.DatabaseConnection;
+        }
 
         public PlayerRepository(String conString)
         {
