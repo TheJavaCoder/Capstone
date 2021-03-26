@@ -16,19 +16,29 @@ namespace GameSystemObjectsTest
             m_playerRepository = new PlayerRepository("data source=tcp:s20.winhost.com;initial catalog=DB_111206_clicker;persist security info=True;user id=DB_111206_clicker_user;password=gtc2021;MultipleActiveResultSets=True;");
         }
 
+        // Known working
         [Fact]
+
         public async Task createPlayer()
         {
             var testLogin = new PlayerLoginModel
             {
-                username = "Sue",
+                username = "laksdjhckajypasodkfadsfpoiausdfoadspiuf",
                 password = "Test",
             };
 
             var result = await m_playerRepository.CreatePlayer(testLogin);
             result.Should().Be(0);
+
+            await m_playerRepository.RemovePlayer(testLogin.username);
         }
 
+        [Fact]
+        public async Task getAllItems()
+        {
+            var result = await m_playerRepository.GetDefaultItemsAsync();
+            result.Should().NotBeEmpty();
+        }
 
         [Fact]
         public async Task attemptLogin()

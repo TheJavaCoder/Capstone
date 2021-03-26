@@ -1,4 +1,5 @@
 using GameSystemObjects.ControllerModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
@@ -11,7 +12,11 @@ namespace GameSystemObjects.Players
         public Task<Player> GetPlayer(string name);
         public Task SavePlayer(Player p);
 
+        public Task<IEnumerable<ItemTask>> GetDefaultItemsAsync();
+
         public Task<int> CreatePlayer(PlayerLoginModel p);
+
+        public Task RemovePlayer(string player);
 
     }
 }
