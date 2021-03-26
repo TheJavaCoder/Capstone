@@ -55,19 +55,12 @@ namespace GameSystemObjects.Players
 
                 if (player == null)
                 {
-                    var p = new Player
-                    {
-                        name = playerLoginModel.username,
-                        items = new List<ItemTask>()
-                    };
                     await CreatePlayer(playerLoginModel);
                     return true;
                 }
 
                 if (playerLoginModel.password != player.password)
-                {
                     return false;
-                }
                 
                 return true;
             }
@@ -76,17 +69,13 @@ namespace GameSystemObjects.Players
         public async Task<int> CreatePlayer(PlayerLoginModel p)
         {
             using (var c = new SqlConnection(m_connectionString))
-            {
                 return await c.QueryFirstOrDefaultAsync<int>("spINSERT_dbo_Player", param: new { p.username, p.password }, commandType: System.Data.CommandType.StoredProcedure);
-            }
         }
 
         public async Task RemovePlayer(string player)
         {
             using (var c = new SqlConnection(m_connectionString))
-            {
                 await c.QueryAsync($"DELETE FROM dbo.Player WHERE username = '{player}'");
-            }
         }
 
         private String m_connectionString;

@@ -23,7 +23,7 @@ namespace GameSystemObjectsTest
         {
             var testLogin = new PlayerLoginModel
             {
-                username = "laksdjhckajypasodkfadsfpoiausdfoadspiuf",
+                username = "laksdjhckajypasodkfadsfpoiausasdfkjhladskjhlkajdhfiuyoaisdufydfoadspiuf",
                 password = "Test",
             };
 
