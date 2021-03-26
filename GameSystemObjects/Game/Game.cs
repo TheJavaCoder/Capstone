@@ -35,7 +35,7 @@ namespace GameSystemObjects.Game
 
                 // Game loop every 1/30th of a second.
                 UpdatePlayerGameSpeed();
-                await Task.Delay((int)( 33 * GameConfig.gameSpeed ) );
+                await Task.Delay((int)(33 * GameConfig.gameSpeed));
             }
 
         }
@@ -62,7 +62,8 @@ namespace GameSystemObjects.Game
                     if (p.items[0].timeCalc != (long)(regularItem.timeCalc * GameConfig.gameSpeed))
                     {
                         p.items.ForEach(i => i.timeCalc = (long)(regularItem.timeCalc * GameConfig.gameSpeed));
-                    }else
+                    }
+                    else
                     {
                         return;
                     }
@@ -109,12 +110,17 @@ namespace GameSystemObjects.Game
     {
         IPlayerRepository playerRepository;
 
+        public CleanUpSessions()
+        {
+
+        }
+
         public CleanUpSessions(IPlayerRepository playerRepository)
         {
             this.playerRepository = playerRepository;
         }
 
-        public void run()
+        public async void run()
         {
 
             while (true)
@@ -126,16 +132,24 @@ namespace GameSystemObjects.Game
                         Player p;
                         GameState.current.players.TryGetValue(key, out p);
 
+                        if (p == null)
+                            continue;
+
+                        p.stats.totalAmountPlayed++;
+
                         if (p.lastSeenTime.AddMinutes(1) < DateTime.Now)
                         {
-                            playerRepository.SavePlayer(p);
+                            if (playerRepository != null)
+                                playerRepository.SavePlayer(p);
                             GameState.current.players.TryRemove(p.name, out _);
+                            GameStat.current.numPlayers--;
                         }
                     }
                 }
 
                 // Remove client if they haven't been seen (or better yet heard for more than a min) and attempt to save their current state.
-                Thread.Sleep(61000);
+                await Task.Delay(60000);
+                GameStat.current.incrementUptime(1);
             }
 
         }
@@ -173,6 +187,9 @@ namespace GameSystemObjects.Game
             //saveThread = new Thread(new ThreadStart(gs.run));
             //saveThread.Start();
 
+            CleanUpSessions cus = new CleanUpSessions();
+            cleanUpSessions = new Thread(new ThreadStart(cus.run));
+            cleanUpSessions.Start();
 
         }
 

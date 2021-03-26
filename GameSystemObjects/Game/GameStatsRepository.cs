@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameSystemObjects.Game
+﻿namespace GameSystemObjects.Game
 {
     class GameStatsRepository
     {

@@ -2,7 +2,7 @@
 
 namespace GameSystemObjects.ControllerModels
 {
-    
+
     public class PlayerLoginModel
     {
         [Description("player_ID")]

@@ -38,7 +38,8 @@ namespace GameSystemObjects.Players
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<ItemTask>> GetDefaultItemsAsync() {
+        public async Task<IEnumerable<ItemTask>> GetDefaultItemsAsync()
+        {
             using (var c = new SqlConnection(m_connectionString))
             {
                 var items = await c.QueryAsync<ItemTask>("Select * FROM dbo.Items");
@@ -60,7 +61,7 @@ namespace GameSystemObjects.Players
 
                 if (playerLoginModel.password != player.password)
                     return false;
-                
+
                 return true;
             }
         }

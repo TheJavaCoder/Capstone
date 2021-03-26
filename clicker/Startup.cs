@@ -1,4 +1,3 @@
-using GameSystemObjects;
 using GameSystemObjects.Configuration;
 using GameSystemObjects.Game;
 using GameSystemObjects.Players;
@@ -35,7 +34,7 @@ namespace clicker
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.Configure<CommonConfiguration>( Configuration.GetSection(nameof(CommonConfiguration)) );
+            services.Configure<CommonConfiguration>(Configuration.GetSection(nameof(CommonConfiguration)));
             services.AddOptions();
 
             services.AddSingleton<IPlayerRepository, PlayerRepository>();

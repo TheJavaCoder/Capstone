@@ -1,29 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GameSystemObjects.Game
 {
     public class GameStat
     {
-        public ulong numPlayers { get; set; }
+        public static GameStat current { get; set; }
 
-        public ulong minsPlayed { get; set; }
+        static GameStat()
+        {
+            current = new GameStat();
+        }
 
-        public Dictionary<int, ItemStat> globalItemTaskStats;
+        public ulong numPlayers { get; set; } = 0;
+
+        public ulong SeesionUptime { get; set; } = 0;
+
+        public ulong ServerUptime { get; set; } = 0;
+
+        public void incrementUptime(ulong amount)
+        {
+            GameStat.current.SeesionUptime += amount;
+            GameStat.current.ServerUptime += amount;
+        }
+
+        public Dictionary<int, ItemStat> globalItemTaskStats { get; set; } = new Dictionary<int, ItemStat>();
 
         public Dictionary<int, KeyValuePair<int, long>> globalItemTaskLeaderBoard()
         {
+            if (GameStat.current.globalItemTaskStats == null || GameStat.current.globalItemTaskStats.Count == 0)
+                return new Dictionary<int, KeyValuePair<int, long>>();
+
             var leaderBoardOfItems = new Dictionary<int, KeyValuePair<int, long>>();
-            globalItemTaskStats.Select( item =>
-            {
-                var sorted = item.Value.leaderBoard.OrderBy(k => k.Value);
+            GameStat.current.globalItemTaskStats.Select(item =>
+           {
+               var sorted = item.Value.leaderBoard.OrderBy(k => k.Value);
 
-                leaderBoardOfItems.Add(item.Key, KeyValuePair.Create(sorted.ElementAt(0).Key, sorted.ElementAt(0).Value));
+               leaderBoardOfItems.Add(item.Key, KeyValuePair.Create(sorted.ElementAt(0).Key, sorted.ElementAt(0).Value));
 
-                return item;
-            } );
+               return item;
+           });
 
             return leaderBoardOfItems;
         }
@@ -31,7 +47,7 @@ namespace GameSystemObjects.Game
 
     public class ItemStat
     {
-        public Dictionary<int, long> leaderBoard { get; set; }
+        public Dictionary<int, long> leaderBoard { get; set; } = new Dictionary<int, long>();
 
         public bool madeLeaderboard(int pId, long itemAmount)
         {

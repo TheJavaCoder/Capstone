@@ -49,7 +49,7 @@ namespace GameSystemObjectsTest
             var result = await m_playerRepository.loginPlayer(testLogin);
 
             result.Should().BeTrue();
-        }  
+        }
 
         IPlayerRepository m_playerRepository;
     }

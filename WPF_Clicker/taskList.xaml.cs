@@ -22,7 +22,7 @@ namespace WPF_Clicker
 
         private string CurrentTask = "";
         private StackPanel currentTaskPanel;
-        
+
         private bool loaded = false;
         private object window1;
 
@@ -39,7 +39,7 @@ namespace WPF_Clicker
 
         public async Task initData()
         {
-            
+
             if (window.player != null)
             {
                 SynchronizationContext.Current.Post(_ => initRender(window.player), null);

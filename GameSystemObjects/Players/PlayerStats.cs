@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameSystemObjects.Players
+﻿namespace GameSystemObjects.Players
 {
     public class PlayerStats
     {
+
+        public long totalAmountPlayed { get; set; }
+
     }
 }

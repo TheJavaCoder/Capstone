@@ -61,6 +61,7 @@ namespace clicker.Controllers
                 p.lastSeenTime = DateTime.Now;
 
                 GameState.current.players.TryAdd(p.name, p);
+                GameStat.current.numPlayers++;
 
                 return p;
             }
@@ -93,6 +94,7 @@ namespace clicker.Controllers
 
             Player p;
             GameState.current.players.TryRemove(name, out p);
+            GameStat.current.numPlayers--;
             await m_PlayerRepository.SavePlayer(p);
 
             return true;
@@ -102,7 +104,7 @@ namespace clicker.Controllers
         public async Task<bool> UploadProfilePic(IFormFile file)
         {
             var filePath = Path.GetTempFileName(); //we are using Temp file name just for the example. Add your own file path.
-            
+
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
