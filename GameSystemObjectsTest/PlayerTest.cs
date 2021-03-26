@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using GameSystemObjects;
+using GameSystemObjects.Game;
 using GameSystemObjects.Players;
 using System;
 using System.Collections.Generic;

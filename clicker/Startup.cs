@@ -1,5 +1,6 @@
 using GameSystemObjects;
 using GameSystemObjects.Configuration;
+using GameSystemObjects.Game;
 using GameSystemObjects.Players;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

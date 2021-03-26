@@ -2,7 +2,6 @@ using GameSystemObjects.ControllerModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-
 namespace GameSystemObjects.Players
 {
     public interface IPlayerRepository

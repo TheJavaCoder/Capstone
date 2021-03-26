@@ -1,4 +1,3 @@
-
 using Dapper;
 using GameSystemObjects.Configuration;
 using GameSystemObjects.ControllerModels;
