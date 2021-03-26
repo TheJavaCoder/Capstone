@@ -1,9 +1,13 @@
 using GameSystemObjects;
+using GameSystemObjects.Configuration;
+using GameSystemObjects.Players;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
+using System.Reflection;
 
 namespace clicker
 {
@@ -16,11 +20,24 @@ namespace clicker
 
         public IConfiguration Configuration { get; }
 
+        public static void ConfigureAppConfiguration(HostBuilderContext context, IConfigurationBuilder builder)
+        {
+
+            builder
+                .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
+                .AddJsonFile("appsettings.common.json", optional: true, reloadOnChange: true);
+
+            builder.Build();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            //services.
+            services.Configure<CommonConfiguration>( Configuration.GetSection(nameof(CommonConfiguration)) );
+            services.AddOptions();
+
+            services.AddSingleton<IPlayerRepository, PlayerRepository>();
             services.AddSingleton<IHostedService, Game>();
             services.AddControllers();
         }

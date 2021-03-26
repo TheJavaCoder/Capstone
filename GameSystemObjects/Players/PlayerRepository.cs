@@ -1,6 +1,8 @@
 
 using Dapper;
+using GameSystemObjects.Configuration;
 using GameSystemObjects.ControllerModels;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,6 +14,11 @@ namespace GameSystemObjects.Players
 {
     public class PlayerRepository : IPlayerRepository
     {
+
+        public PlayerRepository(IOptions<CommonConfiguration> options)
+        {
+            m_connectionString = options.Value.DatabaseConnection;
+        }
 
         public PlayerRepository(String conString)
         {
@@ -30,6 +37,14 @@ namespace GameSystemObjects.Players
         public Task SavePlayer(Player p)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<ItemTask>> GetDefaultItemsAsync() {
+            using (var c = new SqlConnection(m_connectionString))
+            {
+                var items = await c.QueryAsync<ItemTask>("Select * FROM dbo.Items");
+                return items;
+            }
         }
 
         public async Task<bool> loginPlayer(PlayerLoginModel playerLoginModel)
@@ -63,6 +78,14 @@ namespace GameSystemObjects.Players
             using (var c = new SqlConnection(m_connectionString))
             {
                 return await c.QueryFirstOrDefaultAsync<int>("spINSERT_dbo_Player", param: new { p.username, p.password }, commandType: System.Data.CommandType.StoredProcedure);
+            }
+        }
+
+        public async Task RemovePlayer(string player)
+        {
+            using (var c = new SqlConnection(m_connectionString))
+            {
+                await c.QueryAsync($"DELETE FROM dbo.Player WHERE username = '{player}'");
             }
         }
 

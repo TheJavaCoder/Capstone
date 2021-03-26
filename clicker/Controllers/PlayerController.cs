@@ -13,9 +13,9 @@ namespace clicker.Controllers
     public class PlayerController : ControllerBase
     {
 
-        public PlayerController()
+        public PlayerController(IPlayerRepository playerRepository)
         {
-            //m_PlayerRepository = playerRepository;
+            m_PlayerRepository = playerRepository;
         }
 
         [HttpPost]
@@ -52,11 +52,16 @@ namespace clicker.Controllers
                 }
             }, playerLoginModel.username);
 
-            p.lastSeenTime = DateTime.Now;
 
-            GameState.current.players.TryAdd(p.name, p);
+            if(await m_PlayerRepository.loginPlayer(playerLoginModel) == true)
+            {
+                p.lastSeenTime = DateTime.Now;
 
-            return p;
+                GameState.current.players.TryAdd(p.name, p);
+
+                return p;
+            }
+            return null;
         }
         
         [HttpGet]
