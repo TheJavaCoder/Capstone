@@ -2,7 +2,6 @@ using GameSystemObjects.ControllerModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-
 namespace GameSystemObjects.Players
 {
     public interface IPlayerRepository
@@ -18,5 +17,6 @@ namespace GameSystemObjects.Players
 
         public Task RemovePlayer(string player);
 
+        public Task GetStats(string player);
     }
 }

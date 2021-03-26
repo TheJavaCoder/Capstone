@@ -5,7 +5,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GameSystemObjects
+namespace GameSystemObjects.Game
 {
     public class GameLoop
     {
@@ -34,9 +34,41 @@ namespace GameSystemObjects
                 }
 
                 // Game loop every 1/30th of a second.
-                await Task.Delay(33);
+                UpdatePlayerGameSpeed();
+                await Task.Delay((int)(33 * GameConfig.gameSpeed));
             }
 
+        }
+
+        private void UpdatePlayerGameSpeed()
+        {
+            if (!GameState.current.players.IsEmpty)
+            {
+                foreach (string key in GameState.current.players.Keys)
+                {
+                    Player p;
+                    GameState.current.players.TryGetValue(key, out p);
+
+                    if (p == null)
+                        return;
+
+                    var firstItem = p.items[0];
+
+                    if (!GameConfig.DefaultItems.ContainsKey(firstItem.taskId))
+                        return;
+
+                    GameConfig.DefaultItems.TryGetValue(firstItem.taskId, out var regularItem);
+
+                    if (p.items[0].timeCalc != (long)(regularItem.timeCalc * GameConfig.gameSpeed))
+                    {
+                        p.items.ForEach(i => i.timeCalc = (long)(regularItem.timeCalc * GameConfig.gameSpeed));
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
         }
     }
 
@@ -78,12 +110,17 @@ namespace GameSystemObjects
     {
         IPlayerRepository playerRepository;
 
+        public CleanUpSessions()
+        {
+
+        }
+
         public CleanUpSessions(IPlayerRepository playerRepository)
         {
             this.playerRepository = playerRepository;
         }
 
-        public void run()
+        public async void run()
         {
 
             while (true)
@@ -95,16 +132,24 @@ namespace GameSystemObjects
                         Player p;
                         GameState.current.players.TryGetValue(key, out p);
 
+                        if (p == null)
+                            continue;
+
+                        p.stats.totalAmountPlayed++;
+
                         if (p.lastSeenTime.AddMinutes(1) < DateTime.Now)
                         {
-                            playerRepository.SavePlayer(p);
+                            if (playerRepository != null)
+                                playerRepository.SavePlayer(p);
                             GameState.current.players.TryRemove(p.name, out _);
+                            GameStat.current.numPlayers--;
                         }
                     }
                 }
 
                 // Remove client if they haven't been seen (or better yet heard for more than a min) and attempt to save their current state.
-                Thread.Sleep(61000);
+                await Task.Delay(60000);
+                GameStat.current.incrementUptime(1);
             }
 
         }
@@ -142,6 +187,9 @@ namespace GameSystemObjects
             //saveThread = new Thread(new ThreadStart(gs.run));
             //saveThread.Start();
 
+            CleanUpSessions cus = new CleanUpSessions();
+            cleanUpSessions = new Thread(new ThreadStart(cus.run));
+            cleanUpSessions.Start();
 
         }
 

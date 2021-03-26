@@ -1,5 +1,5 @@
-using GameSystemObjects;
 using GameSystemObjects.Configuration;
+using GameSystemObjects.Game;
 using GameSystemObjects.Players;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,11 +34,13 @@ namespace clicker
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.Configure<CommonConfiguration>( Configuration.GetSection(nameof(CommonConfiguration)) );
+            services.Configure<CommonConfiguration>(Configuration.GetSection(nameof(CommonConfiguration)));
             services.AddOptions();
 
             services.AddSingleton<IPlayerRepository, PlayerRepository>();
             services.AddSingleton<IHostedService, Game>();
+            services.AddSingleton<GameStat>();
+            services.AddSingleton<IHostedService, GameConfig>();
             services.AddControllers();
         }
 

@@ -1,9 +1,6 @@
 ﻿using FluentAssertions;
 using GameSystemObjects.ControllerModels;
 using GameSystemObjects.Players;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -23,7 +20,7 @@ namespace GameSystemObjectsTest
         {
             var testLogin = new PlayerLoginModel
             {
-                username = "laksdjhckajypasodkfadsfpoiausdfoadspiuf",
+                username = "laksdjhckajypasodkfadsfpoiausasdfkjhladskjhlkajdhfiuyoaisdufydfoadspiuf",
                 password = "Test",
             };
 
@@ -52,7 +49,7 @@ namespace GameSystemObjectsTest
             var result = await m_playerRepository.loginPlayer(testLogin);
 
             result.Should().BeTrue();
-        }  
+        }
 
         IPlayerRepository m_playerRepository;
     }

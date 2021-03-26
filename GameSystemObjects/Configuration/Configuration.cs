@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace GameSystemObjects.Configuration
 {
     public static class Configuration
@@ -15,5 +12,7 @@ namespace GameSystemObjects.Configuration
     public class CommonConfiguration
     {
         public string DatabaseConnection { get; set; }
+
+        public string ProfileUploadLocation { get; set; }
     }
 }

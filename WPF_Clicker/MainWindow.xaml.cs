@@ -30,7 +30,7 @@ namespace WPF_Clicker
         }
 
         public async Task<Player> loginPlayerAsync(PlayerLoginModel plm)
-        { 
+        {
             var json = JsonConvert.SerializeObject(plm);
 
             var buffer = System.Text.Encoding.UTF8.GetBytes(json);

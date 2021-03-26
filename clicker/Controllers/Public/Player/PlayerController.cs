@@ -1,9 +1,12 @@
 using GameSystemObjects;
 using GameSystemObjects.ControllerModels;
+using GameSystemObjects.Game;
 using GameSystemObjects.Players;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace clicker.Controllers
@@ -53,17 +56,18 @@ namespace clicker.Controllers
             }, playerLoginModel.username);
 
 
-            if(await m_PlayerRepository.loginPlayer(playerLoginModel) == true)
+            if (await m_PlayerRepository.loginPlayer(playerLoginModel) == true)
             {
                 p.lastSeenTime = DateTime.Now;
 
                 GameState.current.players.TryAdd(p.name, p);
+                GameStat.current.numPlayers++;
 
                 return p;
             }
             return null;
         }
-        
+
         [HttpGet]
         [Route("{playerName}")]
         public async Task<ActionResult<Player>> GetPlayerAsync(string playerName)
@@ -84,13 +88,27 @@ namespace clicker.Controllers
             return p;
         }
 
-         [HttpPut]
+        [HttpPut]
         public async Task<ActionResult<bool>> SaveAndRemove(String name)
         {
 
             Player p;
             GameState.current.players.TryRemove(name, out p);
+            GameStat.current.numPlayers--;
             await m_PlayerRepository.SavePlayer(p);
+
+            return true;
+        }
+
+        [HttpPost("profilePicture")]
+        public async Task<bool> UploadProfilePic(IFormFile file)
+        {
+            var filePath = Path.GetTempFileName(); //we are using Temp file name just for the example. Add your own file path.
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
 
             return true;
         }

@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using GameSystemObjects.ControllerModels;
+using System.Windows;
 using System.Windows.Controls;
-using GameSystemObjects.ControllerModels;
 
 namespace WPF_Clicker
 {
@@ -25,10 +25,11 @@ namespace WPF_Clicker
                 password = Password.Text
             };
 
-            if( await window.loginPlayerAsync(plm) != null )
+            if (await window.loginPlayerAsync(plm) != null)
             {
                 window.Content = new taskList(window);
-            }else
+            }
+            else
             {
                 //TODO display message
             }
