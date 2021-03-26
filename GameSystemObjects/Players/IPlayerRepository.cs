@@ -17,5 +17,6 @@ namespace GameSystemObjects.Players
 
         public Task RemovePlayer(string player);
 
+        public Task GetStats(string player);
     }
 }

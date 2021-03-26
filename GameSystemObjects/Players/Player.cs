@@ -11,10 +11,15 @@ namespace GameSystemObjects.Players
     {
         public string name { get; set; }
 
+        public string profilePic { get; set; }
+
         [Required]
         public List<ItemTask> items { get; set; }
 
+        public PlayerStats stats { get; set; }
+
         public DateTime lastSeenTime { get; set; }
+
 
         public Player()
         {

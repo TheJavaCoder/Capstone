@@ -77,6 +77,11 @@ namespace GameSystemObjects.Players
                 await c.QueryAsync($"DELETE FROM dbo.Player WHERE username = '{player}'");
         }
 
+        public Task GetStats(string player)
+        {
+            throw new NotImplementedException();
+        }
+
         private String m_connectionString;
     }
 }

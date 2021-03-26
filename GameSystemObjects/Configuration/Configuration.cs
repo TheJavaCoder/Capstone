@@ -12,5 +12,7 @@ namespace GameSystemObjects.Configuration
     public class CommonConfiguration
     {
         public string DatabaseConnection { get; set; }
+
+        public string ProfileUploadLocation { get; set; }
     }
 }

@@ -40,6 +40,8 @@ namespace clicker
 
             services.AddSingleton<IPlayerRepository, PlayerRepository>();
             services.AddSingleton<IHostedService, Game>();
+            services.AddSingleton<GameStat>();
+            services.AddSingleton<IHostedService, GameConfig>();
             services.AddControllers();
         }
 

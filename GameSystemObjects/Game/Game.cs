@@ -34,9 +34,40 @@ namespace GameSystemObjects.Game
                 }
 
                 // Game loop every 1/30th of a second.
-                await Task.Delay(33);
+                UpdatePlayerGameSpeed();
+                await Task.Delay((int)( 33 * GameConfig.gameSpeed ) );
             }
 
+        }
+
+        private void UpdatePlayerGameSpeed()
+        {
+            if (!GameState.current.players.IsEmpty)
+            {
+                foreach (string key in GameState.current.players.Keys)
+                {
+                    Player p;
+                    GameState.current.players.TryGetValue(key, out p);
+
+                    if (p == null)
+                        return;
+
+                    var firstItem = p.items[0];
+
+                    if (!GameConfig.DefaultItems.ContainsKey(firstItem.taskId))
+                        return;
+
+                    GameConfig.DefaultItems.TryGetValue(firstItem.taskId, out var regularItem);
+
+                    if (p.items[0].timeCalc != (long)(regularItem.timeCalc * GameConfig.gameSpeed))
+                    {
+                        p.items.ForEach(i => i.timeCalc = (long)(regularItem.timeCalc * GameConfig.gameSpeed));
+                    }else
+                    {
+                        return;
+                    }
+                }
+            }
         }
     }
 
