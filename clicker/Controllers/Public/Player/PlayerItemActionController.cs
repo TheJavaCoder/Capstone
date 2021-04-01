@@ -1,5 +1,5 @@
-﻿using GameSystemObjects;
-using GameSystemObjects.ControllerModels;
+﻿using GameSystemObjects.ControllerModels;
+using GameSystemObjects.Game;
 using GameSystemObjects.Players;
 using Microsoft.AspNetCore.Mvc;
 using System;

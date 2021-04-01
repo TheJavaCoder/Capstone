@@ -22,7 +22,7 @@ namespace WPF_Clicker
 
         private string CurrentTask = "";
         private StackPanel currentTaskPanel;
-        private Player player;
+
         private bool loaded = false;
         private object window1;
 
@@ -39,10 +39,10 @@ namespace WPF_Clicker
 
         public async Task initData()
         {
-            player = await window.GetPlayerAsync("Test");
-            if (player != null)
+
+            if (window.player != null)
             {
-                SynchronizationContext.Current.Post(_ => initRender(player), null);
+                SynchronizationContext.Current.Post(_ => initRender(window.player), null);
             }
         }
 
@@ -159,13 +159,13 @@ namespace WPF_Clicker
             pb.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#3B3B3B"));
             pb.Foreground = (SolidColorBrush)(new BrushConverter().ConvertFrom("#616161"));
             pb.Minimum = 0;
-            pb.Maximum = player.getItem(this.CurrentTask).timeCalc;
+            pb.Maximum = window.player.getItem(this.CurrentTask).timeCalc;
             pb.Value = 0;
             pb.Height = 10;
             pb.Margin = new Thickness(-8, 8, -8, -8);
 
-            Duration d = new Duration(TimeSpan.FromMilliseconds(player.getItem(CurrentTask).timeCalc));
-            DoubleAnimation da = new DoubleAnimation(player.getItem(this.CurrentTask).timeCalc, d);
+            Duration d = new Duration(TimeSpan.FromMilliseconds(window.player.getItem(CurrentTask).timeCalc));
+            DoubleAnimation da = new DoubleAnimation(window.player.getItem(this.CurrentTask).timeCalc, d);
             da.RepeatBehavior = RepeatBehavior.Forever;
             pb.BeginAnimation(ProgressBar.ValueProperty, da);
 

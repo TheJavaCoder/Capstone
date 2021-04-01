@@ -1,4 +1,5 @@
 ﻿using GameSystemObjects;
+using GameSystemObjects.ControllerModels;
 using GameSystemObjects.Players;
 using Newtonsoft.Json;
 using System;
@@ -14,7 +15,7 @@ namespace WPF_Clicker
     /// </summary>
     public partial class MainWindow : NavigationWindow
     {
-        Player player;
+        public Player player = null;
         HttpClient client;
 
         public MainWindow()
@@ -28,6 +29,23 @@ namespace WPF_Clicker
             this.Content = new loginPage(this);
         }
 
+        public async Task<Player> loginPlayerAsync(PlayerLoginModel plm)
+        {
+            var json = JsonConvert.SerializeObject(plm);
+
+            var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+            var byteContent = new ByteArrayContent(buffer);
+
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage responseMessage = await client.PostAsync("api/player/", byteContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                player = await responseMessage.Content.ReadAsAsync<Player>(Formatter.MediaTypeFormatters);
+            }
+            return player;
+        }
+
         public async Task<Player> GetPlayerAsync(string pName)
         {
             HttpResponseMessage responseMessage = await client.GetAsync("api/player/" + pName);
@@ -37,8 +55,6 @@ namespace WPF_Clicker
             }
             return player;
         }
-
-
 
 
         public async Task<bool> LogoutPlayerAsync()
