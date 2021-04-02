@@ -25,45 +25,19 @@ namespace clicker.Controllers
         public async Task<ActionResult<Player>> LoginAsync(PlayerLoginModel playerLoginModel)
         {
 
-            Player p = new Player(new List<ItemTask>
-            {
-                new ItemTask
-                {
-                    itemName = "Collect Wood",
-                    taskId = 1,
-                    //enabled = true,
-                    itemIcon = "https://localhost:44339/images/woodTex.png",
-                    itemAmount = 99999,
-                    timeCalc = 500,
-                },
-                new ItemTask
-                {
-                    taskId = 2,
-                    itemName = "Mine Stone",
-                    //enabled = true,
-                    itemIcon = "https://localhost:44339/images/rockTex.png",
-                    timeCalc = 60000,
-                },
-                new ItemTask
-                {
-                    taskId = 3,
-                    itemName = "Meow",
-                    //enabled = true,
-                    itemIcon = "https://www.ctvnews.ca/polopoly_fs/1.4692108.1574174140!/httpImage/image.jpg_gen/derivatives/landscape_620/image.jpg",
-                    timeCalc = 60000,
-
-                }
-            }, playerLoginModel.username);
-
-
             if (await m_PlayerRepository.loginPlayer(playerLoginModel) == true)
             {
-                p.lastSeenTime = DateTime.Now;
+                var player = await m_PlayerRepository.GetPlayer(playerLoginModel.username);
 
-                GameState.current.players.TryAdd(p.name, p);
+                if (player == null)
+                    return null;
+
+                player.lastSeenTime = DateTime.Now;
+
+                GameState.current.players.TryAdd(playerLoginModel.username, player);
                 GameStat.current.numPlayers++;
 
-                return p;
+                return player;
             }
             return null;
         }

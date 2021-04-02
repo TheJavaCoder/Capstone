@@ -28,8 +28,14 @@ namespace GameSystemObjects.Players
         {
             using (var c = new SqlConnection(m_connectionString))
             {
-                var players = await c.QueryAsync<Player>("storedprocedure-name", param: new { name }, commandType: System.Data.CommandType.StoredProcedure);
-                return players.SingleOrDefault();
+                var playerDB = await c.QuerySingleOrDefaultAsync<PlayerLoginModel>("spSELECT_dbo_Player_With_Params", param: new { username = name }, commandType: System.Data.CommandType.StoredProcedure);
+
+                if (playerDB == null)
+                    return null;
+
+                var inventory = await c.QueryAsync<ItemTask>("spSELECT_dbo_Inventory_With_Params", param: new { playerDB.player_ID } , commandType: System.Data.CommandType.StoredProcedure);
+
+                return new Player(inventory.ToList(), name);
             }
         }
 

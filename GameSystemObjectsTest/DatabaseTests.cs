@@ -51,6 +51,21 @@ namespace GameSystemObjectsTest
             result.Should().BeTrue();
         }
 
+        [Fact]
+        public async Task GetPlayer_ShouldReturn()
+        {
+            var testLogin = new PlayerLoginModel
+            {
+                username = "Billy",
+                password = "Test",
+            };
+
+            var result = await m_playerRepository.GetPlayer(testLogin.username);
+
+            result.Should().BeOfType(new Player().GetType());
+            result.items.Should().NotBeEmpty();
+        }
+
         IPlayerRepository m_playerRepository;
     }
 }

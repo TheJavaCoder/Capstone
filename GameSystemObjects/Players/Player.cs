@@ -31,12 +31,14 @@ namespace GameSystemObjects.Players
             lastSeenTime = DateTime.Now;
             this.name = name;
             items = new List<ItemTask>();
+            stats = new PlayerStats();
         }
 
         public Player(List<ItemTask> dbItems, string name)
         {
             this.name = name;
             items = dbItems;
+            stats = new PlayerStats();
         }
 
         public async Task IncrementItem(string item)
