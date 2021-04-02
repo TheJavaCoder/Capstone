@@ -25,8 +25,10 @@ namespace WPF_Clicker
                 password = Password.Text
             };
 
-            if (await window.loginPlayerAsync(plm) != null)
+            var p = await window.loginPlayerAsync(plm);
+            if (p != null)
             {
+                window.player = p;
                 window.Content = new taskList(window);
             }
             else

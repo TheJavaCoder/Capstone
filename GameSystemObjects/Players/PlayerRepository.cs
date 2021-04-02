@@ -38,7 +38,6 @@ namespace GameSystemObjects.Players
                 var itemTasks = new List<ItemTask>();
 
                 inventory.ToList().ForEach(i => itemTasks.Add( new ItemTask(i) ));
-                //var itemTask = inventory.ToList().ForEach(i => new ItemTask(i));
 
                 return new Player(itemTasks, name);
             }
