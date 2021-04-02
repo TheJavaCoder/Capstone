@@ -24,7 +24,6 @@ namespace clicker.Controllers
         [HttpPost]
         public async Task<ActionResult<Player>> LoginAsync(PlayerLoginModel playerLoginModel)
         {
-
             if (await m_PlayerRepository.loginPlayer(playerLoginModel) == true)
             {
                 var player = await m_PlayerRepository.GetPlayer(playerLoginModel.username);

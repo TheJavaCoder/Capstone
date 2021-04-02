@@ -33,9 +33,14 @@ namespace GameSystemObjects.Players
                 if (playerDB == null)
                     return null;
 
-                var inventory = await c.QueryAsync<ItemTask>("spSELECT_dbo_Inventory_With_Params", param: new { playerDB.player_ID } , commandType: System.Data.CommandType.StoredProcedure);
+                var inventory = await c.QueryAsync<itemTaskModel>("spSELECT_dbo_Inventory_With_Params", param: new { playerDB.player_ID } , commandType: System.Data.CommandType.StoredProcedure);
 
-                return new Player(inventory.ToList(), name);
+                var itemTasks = new List<ItemTask>();
+
+                inventory.ToList().ForEach(i => itemTasks.Add( new ItemTask(i) ));
+                //var itemTask = inventory.ToList().ForEach(i => new ItemTask(i));
+
+                return new Player(itemTasks, name);
             }
         }
 
