@@ -9,19 +9,20 @@ Placidie Mugabo,
 Bailey Costello,
 Alan Farmer
 
-## Installation
-
-If you are starting a project from scratch and will host the code on Github, hit the "Use this template" button above the code to get started. If you will host elsewhere, clone this repo and start your project from there.
-
-## Usage
+# Usage
 
 These files only change how your project behaves on github, and most of them will only take effect once merged into your default branch (usually `master` or `dev`).
 
 Keep them up-to-date as your project evolves.
 
-## Contents
+# Contents
 
-Here's a rundown of the files included, as well as why they're important:
+##Front End
+
+##Middle Tier
+
+##Back End
+
 
 ### Readme
 
