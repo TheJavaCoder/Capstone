@@ -1,5 +1,5 @@
 # Gwinnett Technical College Capstone
-C# dotnet core project. We are making an idler game.
+We are making an Idler game. C# dotnet core project.
 
 # Members
 
