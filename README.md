@@ -17,12 +17,6 @@ Keep them up-to-date as your project evolves.
 
 # Contents
 
-##Front End
-
-##Middle Tier
-
-##Back End
-
 
 ### Readme
 
