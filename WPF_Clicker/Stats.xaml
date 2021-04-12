@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:WPF_Clicker"
       mc:Ignorable="d" 
       Height="600" Width="330"
-      Title="taskList" Loaded="Page_Loaded" TextOptions.TextFormattingMode="Display" >
+      Title="Stats" Loaded="Page_Loaded" TextOptions.TextFormattingMode="Display" >
     <Page.Resources>
         <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
         <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
