@@ -15,17 +15,34 @@ enum **Action** - Represents possible actions for each task.
 ## Game
 
 #### Game.cs
-* Gameloop
-* UpdatePlayerGameSpeed
-* GameSave
-* CleanUpSessions
-* Game
-* GameState
+* **Gameloop** - Main game loop. While running, checks that there are players and loops through each player to increment all of their items.
+* **UpdatePlayerGameSpeed** - Updates each players time calculation for their current item task.
+* **GameSave** - Loops through each player and saves them to the player repository every 30 seconds.
+* **CleanUpSessions** - Checks through each player to check if more than a minute has passed since their last seen time, if so, saves and trys to remove to player from the current repository.
+* **Game** - Builds both the GameLoop and CleanUpSessions threads.
+* **GameState** - Static cache object with a currnet gamestate and thread safe list.
 
 #### GameConfig.cs
+Defines objects:
+* Dictionary DefaultItems
+* double GameSpeed
+* playerRepository
+* class GameConfig
+* Task init
+* Task StartAsync
+* Task StopAsync
+
 
 #### GameStat.cs
-Tacks game statistics.
+Defines classes to track game statistics.
+Class GameStat:
+* numPlayer - number of players
+* SessionUpTime - Players time online
+* ServerUpTime - Time the server has been online
+* globalItemTaskStats - Dictionary of ItemStat
+* globalItemTaskLeaderBoard - Key value pair dictionary ot create a leaderboard of players items.
+
+Class ItemStat - Defines a leaderboard using a dictionary with player ids and the amount of items.
 
 #### GameStatRepository.cs
 
@@ -34,10 +51,17 @@ Tacks game statistics.
 ## Players
 
 #### IPlayerRepository
-PlayerRepository interface description
+PlayerRepository interface task object initialization
 
 #### PlayerRepository
-Defines tasks in PlayerRepository
+Defines task objects in PlayerRepository
+* GetPlayer - Requests players information from the database
+* SavePlayer - WIP
+* GetDefaultItemsAsync - Requests default items from the database
+* loginPlayer - Requests and compairs login information
+* CreatePlayer - Adds a new player to the database
+* RemovePlayer - Removes a player from the database
+* GetStats - WIP
 
 #### Player
 Class for players information. Holds Task for interacting with the itemTasks
