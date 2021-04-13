@@ -19,6 +19,7 @@ namespace GameSystemObjects.Players
         public PlayerStats stats { get; set; }
 
         public DateTime lastSeenTime { get; set; }
+        public int Id { get; set; }
 
 
         public Player()

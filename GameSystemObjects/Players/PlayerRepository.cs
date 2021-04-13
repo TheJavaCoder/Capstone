@@ -43,9 +43,20 @@ namespace GameSystemObjects.Players
             }
         }
 
-        public Task SavePlayer(Player p)
+        public async Task SavePlayer(Player p)
         {
-            throw new NotImplementedException();
+            // Save the player's current task, not all tasks.
+            // This needs to be called any time the task is switched
+
+            var item = p.getEnabledTask();
+
+            using (var c = new SqlConnection(m_connectionString))
+            {
+                await c.QueryAsync("UPDATE dbo.Inventory " +
+                             "SET amount = " + item.itemAmount + 
+                             " WHERE player_id = " + p.Id +
+                             " AND inventory_id = " + item.taskId);
+            }
         }
 
         public async Task<IEnumerable<ItemTask>> GetDefaultItemsAsync()
