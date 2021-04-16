@@ -1,6 +1,7 @@
 using Dapper;
 using GameSystemObjects.Configuration;
 using GameSystemObjects.ControllerModels;
+using GameSystemObjects.Models.Items;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -33,11 +34,16 @@ namespace GameSystemObjects.Players
                 if (playerDB == null)
                     return null;
 
-                var inventory = await c.QueryAsync<itemTaskModel>("spSELECT_dbo_Inventory_With_Params", param: new { playerDB.player_ID } , commandType: System.Data.CommandType.StoredProcedure);
+                var inventory = await c.QueryAsync<itemTaskModel_Return>("spSELECT_dbo_Inventory_With_Params", param: new { playerDB.player_ID } , commandType: System.Data.CommandType.StoredProcedure);
 
                 var itemTasks = new List<ItemTask>();
 
-                inventory.ToList().ForEach(i => itemTasks.Add( new ItemTask(i) ));
+                inventory.ToList().ForEach(i =>
+                {
+                    var it = new ItemTask(i);
+                    it.player_id = playerDB.player_ID;
+                    itemTasks.Add(it);
+                });
 
                 return new Player(itemTasks, name);
             }
@@ -45,17 +51,22 @@ namespace GameSystemObjects.Players
 
         public async Task SavePlayer(Player p)
         {
-            // Save the player's current task, not all tasks.
-            // This needs to be called any time the task is switched
+            
+               // Save the player's current task, not all tasks.
+               // This needs to be called any time the task is switched
 
-            var item = p.getEnabledTask();
+
+
+               var item = p.getEnabledTask();
 
             using (var c = new SqlConnection(m_connectionString))
             {
-                await c.QueryAsync("UPDATE dbo.Inventory " +
-                             "SET amount = " + item.itemAmount + 
-                             " WHERE player_id = " + p.Id +
-                             " AND inventory_id = " + item.taskId);
+                await c.ExecuteAsync("spUPDATE_dbo_Inventory_with_TableType", p.items, commandType: CommandType.StoredProcedure);
+
+                //await c.QueryAsync("UPDATE dbo.Inventory " +
+                //             "SET amount = " + item.itemAmount + 
+                //             " WHERE player_id = " + p.Id +
+                //             " AND inventory_id = " + item.taskId);
             }
         }
 
@@ -63,8 +74,12 @@ namespace GameSystemObjects.Players
         {
             using (var c = new SqlConnection(m_connectionString))
             {
-                var items = await c.QueryAsync<ItemTask>("Select * FROM dbo.Items");
-                return items;
+                var items = await c.QueryAsync<DefaultTask>("Select * FROM dbo.Items");
+
+                var list = new List<ItemTask>();
+                items.ToList().ForEach((i) => list.Add(new ItemTask(i)));
+
+                return list;
             }
         }
 
@@ -90,7 +105,28 @@ namespace GameSystemObjects.Players
         public async Task<int> CreatePlayer(PlayerLoginModel p)
         {
             using (var c = new SqlConnection(m_connectionString))
-                return await c.QueryFirstOrDefaultAsync<int>("spINSERT_dbo_Player", param: new { p.username, p.password }, commandType: System.Data.CommandType.StoredProcedure);
+            {
+                var pID = await c.QueryFirstOrDefaultAsync<int>("spINSERT_dbo_Player", param: new { p.username, p.password }, commandType: System.Data.CommandType.StoredProcedure);
+
+                var defaultItems = await GetDefaultItemsAsync();
+
+                var items = defaultItems.ToList().Select(( ItemTask i, int idx) =>
+                {
+                    i.itemAmount = 1;
+                    i.player_id = pID;
+                    return new ItemTask_Insert(i);
+                }).ToDataTable();
+
+                try
+                {
+                    await c.ExecuteAsync("spINSERT_dbo_Inventory", param: new { Invent = items }, commandType: CommandType.StoredProcedure);
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
+
+                return pID;
+            }
         }
 
         public async Task RemovePlayer(string player)
