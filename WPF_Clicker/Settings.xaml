@@ -73,7 +73,7 @@
             
         </StackPanel>
 
-        <StackPanel>
+        <StackPanel HorizontalAlignment="Left" Width="330">
 
             <Button Margin="0,100,0,0" Width="200" Height="50" Click="Button_Click">
                 Leaderboard
