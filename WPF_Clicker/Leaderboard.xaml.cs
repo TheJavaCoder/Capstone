@@ -22,5 +22,15 @@ namespace WPF_Clicker
         {
             InitializeComponent();
         }
+
+        private void spLineUp(object sender, RoutedEventArgs e)
+        {
+            ((IScrollInfo)sp1).LineUp();
+        }
+
+        private void spLineDown(object sender, RoutedEventArgs e)
+        {
+            ((IScrollInfo)sp1).LineDown();
+        }
     }
 }

@@ -48,7 +48,7 @@
 
         <ScrollViewer HorizontalScrollBarVisibility="Auto">
             <StackPanel Width="308">
-                
+                    
             </StackPanel>
         </ScrollViewer>
 
