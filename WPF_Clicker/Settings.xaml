@@ -65,12 +65,21 @@
 
 
 
-        <StackPanel Margin="70,130,70,0">
-         
-            <Button Margin="0,280,0,0" Width="100" Click="Button_Click">
+        <StackPanel>
+            
+            <Button Margin="0,380,0,0" Width="100" Height="50" Click="Button_Click">
                 Sign Out
             </Button>
-
+            
         </StackPanel>
-        </Grid>
+
+        <StackPanel>
+
+            <Button Margin="0,100,0,0" Width="200" Height="50" Click="Button_Click">
+                Leaderboard
+            </Button>
+            
+        </StackPanel>
+
+    </Grid>
 </Page>
