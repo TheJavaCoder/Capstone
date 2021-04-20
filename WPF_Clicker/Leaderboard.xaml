@@ -46,8 +46,10 @@
         <Label x:Name="TaskLabel" HorizontalAlignment="Center" FontSize="25" FontStyle="Normal" Foreground="White" FontWeight="ExtraLight">Leaderboard</Label>
         <Line X1="00" Y1="50" X2="290" Y2="50" HorizontalAlignment="Center" Stroke="white" StrokeThickness="1" SnapsToDevicePixels="True" />
 
-        <ScrollViewer Margin="0, 55, 0, 60" HorizontalScrollBarVisibility="Disabled" x:Name="Container" VerticalScrollBarVisibility="Hidden">
-            <StackPanel Orientation="Vertical" x:Name="ContentContainer"></StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto">
+            <StackPanel Width="308">
+                
+            </StackPanel>
         </ScrollViewer>
 
         <Grid Height="60"  Grid.Row="1" Margin="00" VerticalAlignment="Bottom">
