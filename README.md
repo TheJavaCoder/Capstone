@@ -1,5 +1,5 @@
 # Capstone
-Gwinnett tech capstone C# dotnet core project. We are making an idler game.
+Gwinnett Technical College Capstone C# dotnet core project. We are making an idle game similar to the likes of Melvor Idle https://melvoridle.com/.
 
 # Members
 
