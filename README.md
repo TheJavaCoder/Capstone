@@ -9,15 +9,15 @@ Placidie Mugabo,
 Bailey Costello,
 Alan Farmer
 
-## Installation
+<!--- ## Installation
 
-If you are starting a project from scratch and will host the code on Github, hit the "Use this template" button above the code to get started. If you will host elsewhere, clone this repo and start your project from there.
+<!--- If you are starting a project from scratch and will host the code on Github, hit the "Use this template" button above the code to get started. If you will host elsewhere, clone this repo and start your project from there.
 
-## Usage
+<!--- ## Usage
 
-These files only change how your project behaves on github, and most of them will only take effect once merged into your default branch (usually `master` or `dev`).
+<!--- These files only change how your project behaves on github, and most of them will only take effect once merged into your default branch (usually `master` or `dev`).
 
-Keep them up-to-date as your project evolves.
+<!--- Keep them up-to-date as your project evolves. 
 
 # Contents
 
