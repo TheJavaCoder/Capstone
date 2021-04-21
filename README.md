@@ -1,5 +1,5 @@
-# Gwinnett Technical College Capstone
-We are making an Idler game. C# dotnet core project.
+# Capstone
+Gwinnett Technical College Capstone C# dotnet core project. We are making an idle game similar to the likes of Melvor Idle https://melvoridle.com/.
 
 # Members
 
@@ -11,37 +11,42 @@ Alan Farmer
 
 # Contents
 
+Here's a rundown of the files included, as well as why they're important:
 
-### Readme
+## clicker
 
-Every project should have a Readme (usually a Markdown file). It should describe your specific project and have at least three sections:
 
-1. **Project Name** and description.
-1. **Installation** List any major dependencies, system requirements, and gotchas.
-1. **Usage** How to run the project.
 
-### Pull Request Template
+## GameSystemObjects
 
-This Markdown file prepopulates new Pull Requests. Using it as a prompt helps team members write infomative pull requests, makes code easier to test, and leaves a paper trail of code and decisions.
 
-It can live in the `/.github` folder, the `/docs` folder, or the project root.
 
-### Issue Template
+## GameSystemObjectsTest
 
-Issue templates benefit developers and any other team members who may be performing QA or developing project requirements.
 
-These markdown files prepopulate new Issues filed on github. When a team member files an issue, they are given different prompts based on what type of issue they are creating. For example, a Bug issue template may include steps to reproduce, and a CMS template may include optional vs. required fields.
+## WPF_Clicker
 
-You can create as many issue templates as you want. They live in the `/.github/ISSUE_TEMPLATE` directory.
+This is our GUI for our project. We are using WPF with C# ASP.net core framework to show for our front-end. 
 
-Each issue template needs to start with this markup:
 
-```
----
-name: Issue Type
-about: Further description of this category.
+### App.xaml
 
----
-```
 
-This frontmatter will be used to populate the Issue Picker UI in Github.
+### Leaderboard.xaml
+
+
+### loginPage.xaml
+
+
+### MainWindow.xaml
+
+
+### Settings.xaml
+
+
+### Stats.xaml
+
+
+### taskList.xaml
+
+
