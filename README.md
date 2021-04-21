@@ -15,6 +15,11 @@ Here's a rundown of the files included, as well as why they're important:
 
 ## clicker
 
+Where the project starts and stops. Also the middle-tier.
+
+### Program.cs
+
+### Startup.cs
 
 
 ## GameSystemObjects
@@ -23,7 +28,7 @@ Here's a rundown of the files included, as well as why they're important:
 
 ## GameSystemObjectsTest
 
-This is where we test the system logic and make sure the database is working with our middletier. 
+This is where we test the system logic and make sure the database is working with our GameSystemObjects. 
 
 
 ### DatabaseTests.cs
