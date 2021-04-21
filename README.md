@@ -9,12 +9,6 @@ Placidie Mugabo,
 Bailey Costello,
 Alan Farmer
 
-# Usage
-
-These files only change how your project behaves on github, and most of them will only take effect once merged into your default branch (usually `master` or `dev`).
-
-Keep them up-to-date as your project evolves.
-
 # Contents
 
 
