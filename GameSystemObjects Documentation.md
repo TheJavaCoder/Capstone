@@ -1,4 +1,4 @@
-# GameStytemObjects Documentation
+# GameSystemObjects Documentation
 Why it exists and why certain abstractions were created.
 ## Controller Models
 
@@ -7,7 +7,7 @@ Why it exists and why certain abstractions were created.
 
 
 #### PlayerItemActionModel
-Holds a enumerator and class.
+Holds an enumerator and class.
 **PlayerItemActionModel** - Class that holds data for communicating actions players take on certain task. 
 enum **Action** - Represents possible actions for each task.
 
