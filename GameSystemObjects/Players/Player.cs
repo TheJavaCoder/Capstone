@@ -9,6 +9,7 @@ namespace GameSystemObjects.Players
     [Serializable]
     public class Player
     {
+        public int _id { get; set; }
         public string name { get; set; }
 
         public string profilePic { get; set; }
