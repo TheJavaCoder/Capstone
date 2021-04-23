@@ -25,7 +25,7 @@ namespace GameSystemObjectsTest
             };
 
             var result = await m_playerRepository.CreatePlayer(testLogin);
-            result.Should().Be(0);
+            result.Should().BeGreaterThan(0);
 
             await m_playerRepository.RemovePlayer(testLogin.username);
         }
@@ -59,6 +59,8 @@ namespace GameSystemObjectsTest
                 username = "Billy",
                 password = "Test",
             };
+
+            await m_playerRepository.loginPlayer(testLogin);
 
             var result = await m_playerRepository.GetPlayer(testLogin.username);
 
