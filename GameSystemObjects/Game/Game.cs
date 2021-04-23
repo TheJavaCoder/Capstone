@@ -159,15 +159,48 @@ namespace GameSystemObjects.Game
 
     }
 
+    public class UpdateGameStats
+    {
+
+        IGameStatsRepository gameStatsRepository;
+
+        public UpdateGameStats()
+        {
+
+        }
+
+        public UpdateGameStats(IGameStatsRepository gameStats)
+        {
+            this.gameStatsRepository = gameStats;
+        }
+
+        public async void run()
+        {
+            while(true)
+            {
+                if(gameStatsRepository != null)
+                {
+                    //GameStat.current.globalLeaderboard = gameStatsRepository
+                }
+
+                // Once an hour update the global leaderboard
+                await Task.Delay(3600000);
+            }
+        }
+
+    }
+
     public class Game : IHostedService
     {
         // Need a link to the current Repository Singleton instance
         IPlayerRepository playerRepository;
+        IGameStatsRepository GameStatsRepository;
 
         // Threads to run and save the game
         Thread gameThread;
         Thread saveThread;
         Thread cleanUpSessions;
+        Thread updateGameStats;
 
         public Game() { }
 
@@ -179,7 +212,7 @@ namespace GameSystemObjects.Game
         }
 
 
-        // Building both threads.
+        // Building threads.
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             GameLoop gl = new GameLoop();
@@ -193,6 +226,10 @@ namespace GameSystemObjects.Game
             CleanUpSessions cus = new CleanUpSessions();
             cleanUpSessions = new Thread(new ThreadStart(cus.run));
             cleanUpSessions.Start();
+
+            UpdateGameStats stats = new UpdateGameStats();
+            updateGameStats = new Thread(new ThreadStart(stats.run));
+            updateGameStats.Start();
 
         }
 
