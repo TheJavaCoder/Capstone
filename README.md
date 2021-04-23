@@ -1,5 +1,5 @@
 # Capstone
-Gwinnett tech capstone C# dotnet core project. We are making an idler game.
+Gwinnett Technical College Capstone C# dotnet core project. We are making an idle game similar to the likes of Melvor Idle https://melvoridle.com/.
 
 # Members
 
@@ -9,55 +9,85 @@ Placidie Mugabo,
 Bailey Costello,
 Alan Farmer
 
-## Installation
+# GameSystemObjects Documentation
+Why it exists and why certain abstractions were created.
+## Controller Models
 
-If you are starting a project from scratch and will host the code on Github, hit the "Use this template" button above the code to get started. If you will host elsewhere, clone this repo and start your project from there.
+#### PlayerLoginModel
+**PlayerLoginModel** - Class to hold data used to login a user. Holds the player_ID, username, and password.
 
-## Usage
 
-These files only change how your project behaves on github, and most of them will only take effect once merged into your default branch (usually `master` or `dev`).
+#### PlayerItemActionModel
+Holds an enumerator and class.
+**PlayerItemActionModel** - Class that holds data for communicating actions players take on certain task. 
+enum **Action** - Represents possible actions for each task.
 
-Keep them up-to-date as your project evolves.
 
-## Contents
+## Game
 
-Here's a rundown of the files included, as well as why they're important:
+#### Game.cs
+* **Gameloop** - Main game loop. While running, checks that there are players and loops through each player to increment all of their items.
+* **UpdatePlayerGameSpeed** - Updates each players time calculation for their current item task.
+* **GameSave** - Loops through each player and saves them to the player repository every 30 seconds.
+* **CleanUpSessions** - Checks through each player to check if more than a minute has passed since their last seen time, if so, saves and trys to remove to player from the current repository.
+* **Game** - Builds both the GameLoop and CleanUpSessions threads.
+* **GameState** - Static cache object with a currnet gamestate and thread safe list.
 
-### Readme
+#### GameConfig.cs
+Defines objects:
+* Dictionary DefaultItems
+* double GameSpeed
+* playerRepository
+* class GameConfig
+* Task init
+* Task StartAsync
+* Task StopAsync
 
-Every project should have a Readme (usually a Markdown file). It should describe your specific project and have at least three sections:
 
-1. **Project Name** and description.
-1. **Installation** List any major dependencies, system requirements, and gotchas.
-1. **Usage** How to run the project.
+#### GameStat.cs
+Defines classes to track game statistics.
+Class GameStat:
+* numPlayer - number of players
+* SessionUpTime - Players time online
+* ServerUpTime - Time the server has been online
+* globalItemTaskStats - Dictionary of ItemStat
+* globalItemTaskLeaderBoard - Key value pair dictionary ot create a leaderboard of players items.
 
-### Pull Request Template
+Class ItemStat - Defines a leaderboard using a dictionary with player ids and the amount of items.
 
-This Markdown file prepopulates new Pull Requests. Using it as a prompt helps team members write infomative pull requests, makes code easier to test, and leaves a paper trail of code and decisions.
+#### GameStatRepository.cs
 
-It can live in the `/.github` folder, the `/docs` folder, or the project root.
+#### IGameStatRepository.cs
 
-### Issue Template
+## Players
 
-Issue templates benefit developers and any other team members who may be performing QA or developing project requirements.
+#### IPlayerRepository
+PlayerRepository interface task object initialization
 
-These markdown files prepopulate new Issues filed on github. When a team member files an issue, they are given different prompts based on what type of issue they are creating. For example, a Bug issue template may include steps to reproduce, and a CMS template may include optional vs. required fields.
+#### PlayerRepository
+Defines task objects in PlayerRepository
+* GetPlayer - Requests players information from the database
+* SavePlayer - WIP
+* GetDefaultItemsAsync - Requests default items from the database
+* loginPlayer - Requests and compairs login information
+* CreatePlayer - Adds a new player to the database
+* RemovePlayer - Removes a player from the database
+* GetStats - WIP
 
-You can create as many issue templates as you want. They live in the `/.github/ISSUE_TEMPLATE` directory.
+#### Player
+Class for players information. Holds Task for interacting with the itemTasks
 
-Each issue template needs to start with this markup:
+#### PlayerStats
+Class, holds total time played.
 
-```
----
-name: Issue Type
-about: Further description of this category.
-
----
-```
-
-This frontmatter will be used to populate the Issue Picker UI in Github.
-
-## Other things to explore
-
-- Steve Mao has a huge repository of issue templates [here](https://github.com/stevemao/github-issue-templates)
-- This repo contains the essentials for running any project, but if your project is community-based, you should leverage additional documentation such as a [code of conduct](https://help.github.com/articles/adding-a-code-of-conduct-to-your-project/), [changelong](https://github.com/olivierlacan/keep-a-changelog), and [contribution guidelines](https://help.github.com/articles/setting-guidelines-for-repository-contributors/).
+### ItemTask
+Object that holds all task data.
+* **taskId** - Task ID for Database, int
+* **itemName** - Item/Task name, string
+* **itemIcon** - Location for Item/Task Icon, string
+* **resourceGatheringLevel** - The upgrade level of the task, int
+* **itemAmount** - Amount of this item this player has, long
+* **lastStartedTime** - The last time an item was gathered, long
+* **timeCalc** - The time it takes for the task to complete and add to itemAmount, long
+* **enabled** - Whether the task is running or not, bool
+* **upgradeGatheringLevelCost** - Method to determin the upgrade cost of this task, int
