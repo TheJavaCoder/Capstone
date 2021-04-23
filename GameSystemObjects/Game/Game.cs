@@ -29,7 +29,10 @@ namespace GameSystemObjects.Game
 
                         // Increment that Item
                         if (currentTask != null)
+                        {
                             p.IncrementItem(currentTask.itemName);
+                            GameStat.current.UpdateLiveLeaderBoard(p.name, currentTask.taskId, p.getEnabledTask().resourceGatheringLevel);
+                        }
                     }
                 }
 
@@ -49,7 +52,7 @@ namespace GameSystemObjects.Game
                     Player p;
                     GameState.current.players.TryGetValue(key, out p);
 
-                    if (p == null)
+                    if (p == null || p.items.Count <= 0 || GameConfig.DefaultItems == null)
                         return;
 
                     var firstItem = p.items[0];

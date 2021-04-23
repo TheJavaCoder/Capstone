@@ -25,7 +25,10 @@ namespace GameSystemObjects.Game
             var defaultItems = await playerRepository.GetDefaultItemsAsync();
             var dictionaryOfItems = new Dictionary<int, ItemTask>();
 
-            defaultItems.AsParallel().ForAll(it => dictionaryOfItems.Add(((ItemTask)it).taskId, (ItemTask)it));
+            defaultItems.All(it => {
+                dictionaryOfItems.Add(((ItemTask)it).taskId, (ItemTask)it);
+                return true;
+                });
             DefaultItems = dictionaryOfItems;
         }
 

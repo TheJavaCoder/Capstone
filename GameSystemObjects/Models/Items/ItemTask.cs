@@ -1,4 +1,5 @@
 ﻿using GameSystemObjects.ControllerModels;
+using GameSystemObjects.Models.Items;
 using System;
 using System.ComponentModel;
 
@@ -9,6 +10,9 @@ namespace GameSystemObjects
     {
         [Description("inventory_item")]
         public int taskId { get; set; }
+
+        [Description("player_id")]
+        public int player_id { get; set; }
 
         [Description("item_name")]
         public string itemName { get; set; }
@@ -27,12 +31,13 @@ namespace GameSystemObjects
         // the time it takes an item to be gathered
         [Description("calc")]
         public long timeCalc { get; set; }
-
+        
+        [Description("enabled")]
         public bool enabled { get; set; }
 
         public ItemTask() { }
 
-        public ItemTask(itemTaskModel itemtaskModel)
+        public ItemTask(itemTaskModel_Return itemtaskModel)
         {
             this.itemName = itemtaskModel.item_name;
             this.taskId = itemtaskModel.inventory_item;
@@ -40,6 +45,14 @@ namespace GameSystemObjects
             this.timeCalc = long.Parse( itemtaskModel.calc );
             this.itemAmount = itemtaskModel.amount;
             this.itemIcon = itemtaskModel.icon;
+        }
+
+        public ItemTask(DefaultTask defaultTask)
+        {
+            this.taskId = defaultTask.items_id;
+            this.itemName = defaultTask.item_name;
+            this.itemIcon = defaultTask.icon;
+            this.timeCalc = long.Parse(defaultTask.calc);
         }
 
         public int upgradeGatheringLevelCost()
