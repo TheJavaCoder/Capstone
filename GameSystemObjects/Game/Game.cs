@@ -31,7 +31,7 @@ namespace GameSystemObjects.Game
                         if (currentTask != null)
                         {
                             p.IncrementItem(currentTask.itemName);
-                            GameStat.current.UpdateLiveLeaderBoard(p.Id, currentTask.taskId, p.getEnabledTask().resourceGatheringLevel);
+                            GameStat.current.UpdateLiveLeaderBoard(p.name, currentTask.taskId, p.getEnabledTask().resourceGatheringLevel);
                         }
                     }
                 }

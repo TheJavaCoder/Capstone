@@ -15,15 +15,15 @@ namespace GameSystemObjectsTest
         public Task UpdateLiveLeaderBoard_Should()
         {
 
-            GameStat.current.UpdateLiveLeaderBoard(1, 1, 1);
+            GameStat.current.UpdateLiveLeaderBoard("Test", 1, 1);
             
             GameStat.current.liveLeaderBoard.Count.Should().BeGreaterThan(0);
 
-            GameStat.current.UpdateLiveLeaderBoard(1, 1, 1);
+            GameStat.current.UpdateLiveLeaderBoard("Test", 1, 1);
 
             GameStat.current.liveLeaderBoard.TryGetValue(1, out var item);
 
-            item.leaderBoard.TryGetValue(1, out var pl);
+            item.leaderBoard.TryGetValue("Test", out var pl);
 
             pl.Should().Be(2);
 

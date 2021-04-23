@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace GameSystemObjects.Game
 {
+    [Serializable]
     public class GameStat
     {
         public static GameStat current { get; set; }
@@ -29,7 +30,7 @@ namespace GameSystemObjects.Game
         // Only the leaders online...
         public ConcurrentDictionary<int, ItemStat> liveLeaderBoard { get; set; } = new ConcurrentDictionary<int, ItemStat>();
 
-        public void UpdateLiveLeaderBoard(int playerID, int itemId, int itemAmountPerTick)
+        public void UpdateLiveLeaderBoard(string playerID, int itemId, int itemAmountPerTick)
         {
 
             var itemStat = liveLeaderBoard.GetOrAdd(itemId, (s) =>
@@ -43,30 +44,31 @@ namespace GameSystemObjects.Game
         }
 
 
-        public Dictionary<int, KeyValuePair<int, long>> globalItemTaskLeaderBoard()
-        {
-            if (GameStat.current.liveLeaderBoard == null || GameStat.current.liveLeaderBoard.Count == 0)
-                return new Dictionary<int, KeyValuePair<int, long>>();
+        //public Dictionary<int, KeyValuePair<int, long>> globalItemTaskLeaderBoard()
+        //{
+        //    if (GameStat.current.liveLeaderBoard == null || GameStat.current.liveLeaderBoard.Count == 0)
+        //        return new Dictionary<int, KeyValuePair<int, long>>();
 
-            var leaderBoardOfItems = new Dictionary<int, KeyValuePair<int, long>>();
-            GameStat.current.liveLeaderBoard.Select(item =>
-           {
-               var sorted = item.Value.leaderBoard.OrderBy(k => k.Value);
+        //    var leaderBoardOfItems = new Dictionary<int, KeyValuePair<int, long>>();
+        //    GameStat.current.liveLeaderBoard.Select(item =>
+        //   {
+        //       var sorted = item.Value.leaderBoard.OrderBy(k => k.Value);
 
-               leaderBoardOfItems.Add(item.Key, KeyValuePair.Create(sorted.ElementAt(0).Key, sorted.ElementAt(0).Value));
+        //       leaderBoardOfItems.Add(item.Key, KeyValuePair.Create(sorted.ElementAt(0).Key, sorted.ElementAt(0).Value));
 
-               return item;
-           });
+        //       return item;
+        //   });
 
-            return leaderBoardOfItems;
-        }
+        //    return leaderBoardOfItems;
+        //}
     }
 
+    [Serializable]
     public class ItemStat
     {
-        public ConcurrentDictionary<int, long> leaderBoard { get; set; } = new ConcurrentDictionary<int, long>();
+        public ConcurrentDictionary<string, long> leaderBoard { get; set; } = new ConcurrentDictionary<string, long>();
 
-        public bool UpdateOrAddToLeaderBoard(int pId, long itemAmount)
+        public bool UpdateOrAddToLeaderBoard(string pId, long itemAmount)
         {
             if (!leaderBoard.ContainsKey(pId))
                 return addToLeaderboard(pId, itemAmount);
@@ -77,7 +79,7 @@ namespace GameSystemObjects.Game
             return true;
         } 
 
-        private bool addToLeaderboard(int pId, long itemAmount)
+        private bool addToLeaderboard(string pId, long itemAmount)
         {
             // This is if the leader board isn't full already
             if (leaderBoard.Count <= 100)
@@ -86,10 +88,10 @@ namespace GameSystemObjects.Game
                 return true;
             }
 
-            var userpassed = -1;
-            leaderBoard.Select(k => k.Value < itemAmount ? userpassed = k.Key : -1);
+            var userpassed = "";
+            leaderBoard.Select(k => k.Value < itemAmount ? userpassed = k.Key : null);
 
-            if (userpassed == -1)
+            if (userpassed != null)
                 return false;
 
             leaderBoard.TryRemove(userpassed, out _);
@@ -98,7 +100,7 @@ namespace GameSystemObjects.Game
             return true;
         }
 
-        public IOrderedEnumerable<KeyValuePair<int, long>> getLeaderBoard(int amount)
+        public IOrderedEnumerable<KeyValuePair<string, long>> getLeaderBoard(int amount)
         {
             return leaderBoard.Take(amount).OrderBy(k => k.Value);
         }
