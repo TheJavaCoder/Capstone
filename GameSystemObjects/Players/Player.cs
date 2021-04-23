@@ -42,17 +42,17 @@ namespace GameSystemObjects.Players
             stats = new PlayerStats();
         }
 
-        public async Task IncrementItem(string item)
+        public async Task<bool> IncrementItem(string item)
         {
             ItemTask foundItem = getItem(item);
 
             if (foundItem == null)
-                return;
+                return false;
 
             if (foundItem.lastStartedTime == null || foundItem.lastStartedTime == 0)
             {
                 foundItem.lastStartedTime = DateTime.Now.Ticks;
-                return;
+                return false;
             }
 
             if (foundItem.lastStartedTime + foundItem.timeCalc < DateTime.Now.Ticks)
@@ -60,6 +60,8 @@ namespace GameSystemObjects.Players
                 foundItem.itemAmount += foundItem.resourceGatheringLevel;
                 foundItem.lastStartedTime = DateTime.Now.Ticks;
             }
+
+            return true;
         }
 
 
