@@ -14,6 +14,8 @@ namespace WPF_Clicker
         {
             InitializeComponent();
             settingsWindow = mw;
+            onlinePlayersText.Content = "35 Clicking Nerds";
+
         }
 
         private void TaskButton_Click(object sender, RoutedEventArgs e)
@@ -25,6 +27,7 @@ namespace WPF_Clicker
         {
             await settingsWindow.LogoutPlayerAsync();
         }
+
     }
 }
 
