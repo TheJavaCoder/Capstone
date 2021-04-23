@@ -17,11 +17,11 @@ namespace GameSystemObjectsTest
 
             GameStat.current.UpdateLiveLeaderBoard("Test", 1, 1);
             
-            GameStat.current.liveLeaderBoard.Count.Should().BeGreaterThan(0);
+            GameStat.current.liveServerLeaderBoard.Count.Should().BeGreaterThan(0);
 
             GameStat.current.UpdateLiveLeaderBoard("Test", 1, 1);
 
-            GameStat.current.liveLeaderBoard.TryGetValue(1, out var item);
+            GameStat.current.liveServerLeaderBoard.TryGetValue(1, out var item);
 
             item.leaderBoard.TryGetValue("Test", out var pl);
 
