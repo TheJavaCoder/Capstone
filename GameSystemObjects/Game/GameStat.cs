@@ -27,13 +27,12 @@ namespace GameSystemObjects.Game
             GameStat.current.ServerUptime += amount;
         }
 
-        // Only the leaders online...
-        public ConcurrentDictionary<int, ItemStat> liveLeaderBoard { get; set; } = new ConcurrentDictionary<int, ItemStat>();
+        // Only the leaders online on this server during the current session
+        public ConcurrentDictionary<int, ItemStat> liveServerLeaderBoard { get; set; } = new ConcurrentDictionary<int, ItemStat>();
 
         public void UpdateLiveLeaderBoard(string playerID, int itemId, int itemAmountPerTick)
         {
-
-            var itemStat = liveLeaderBoard.GetOrAdd(itemId, (s) =>
+            var itemStat = liveServerLeaderBoard.GetOrAdd(itemId, (s) =>
             {
                 return new ItemStat();
             });
@@ -44,23 +43,16 @@ namespace GameSystemObjects.Game
         }
 
 
-        //public Dictionary<int, KeyValuePair<int, long>> globalItemTaskLeaderBoard()
-        //{
-        //    if (GameStat.current.liveLeaderBoard == null || GameStat.current.liveLeaderBoard.Count == 0)
-        //        return new Dictionary<int, KeyValuePair<int, long>>();
+        // Global Across All Servers Leaderboard
+        public ConcurrentDictionary<int, ItemStat> globalLeaderboard { get; set; } = new ConcurrentDictionary<int, ItemStat>();
 
-        //    var leaderBoardOfItems = new Dictionary<int, KeyValuePair<int, long>>();
-        //    GameStat.current.liveLeaderBoard.Select(item =>
-        //   {
-        //       var sorted = item.Value.leaderBoard.OrderBy(k => k.Value);
+        public DateTime lastGlobalLeaderboardUpdate { get; set; }
 
-        //       leaderBoardOfItems.Add(item.Key, KeyValuePair.Create(sorted.ElementAt(0).Key, sorted.ElementAt(0).Value));
-
-        //       return item;
-        //   });
-
-        //    return leaderBoardOfItems;
-        //}
+        public void UpdateGlobalLeaderboard()
+        {
+            lastGlobalLeaderboardUpdate = DateTime.Now;
+        }
+        
     }
 
     [Serializable]
