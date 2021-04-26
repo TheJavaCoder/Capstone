@@ -11,6 +11,7 @@ Alan Farmer
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # GameSystemObjects Documentation
 Why it exists and why certain abstractions were created.
 ## Controller Models
@@ -98,6 +99,9 @@ Object that holds all task data.
 =======
 <!--- ## Installation
 >>>>>>> 65aaf36 (commenting out installation and usage)
+=======
+<!--- ## Installation
+>>>>>>> 2c2be1e147929dcf3dd19ab9534615e2a7cd8ceb
 
 <!--- If you are starting a project from scratch and will host the code on Github, hit the "Use this template" button above the code to get started. If you will host elsewhere, clone this repo and start your project from there.
 
@@ -147,4 +151,7 @@ This is our GUI for our project. We are using WPF with C# ASP.net core framework
 
 ### taskList.xaml
 
+<<<<<<< HEAD
 >>>>>>> a67432d (updated content for formatting)
+=======
+>>>>>>> 2c2be1e147929dcf3dd19ab9534615e2a7cd8ceb
