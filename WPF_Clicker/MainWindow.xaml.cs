@@ -68,6 +68,7 @@ namespace WPF_Clicker
             HttpResponseMessage responseMessage = await client.PutAsync("api/player/" + player.name, content);
             if (responseMessage.IsSuccessStatusCode)
             {
+                this.Content = new loginPage(this);
                 return true;
             }
             return false;
