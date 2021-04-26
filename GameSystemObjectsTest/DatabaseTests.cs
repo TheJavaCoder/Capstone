@@ -83,7 +83,7 @@ namespace GameSystemObjectsTest
             //Get the test player's items list
             var testPlayer = await m_playerRepository.GetPlayer(testLogin.username);
             //Create a Player object to send to the SavePlayer function
-            testPlayer.items[0].itemAmount = 2334;
+            testPlayer.items[0].itemAmount = 1000;
             //Save the test player into the database
             await m_playerRepository.SavePlayer(testPlayer);
             //Check to see that the player got saved

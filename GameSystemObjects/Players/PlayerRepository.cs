@@ -45,7 +45,9 @@ namespace GameSystemObjects.Players
                     itemTasks.Add(it);
                 });
 
-                return new Player(itemTasks, name);
+                var playerReturn = new Player(itemTasks, name);
+                playerReturn._id = playerDB.player_ID;
+                return playerReturn;
             }
         }
 
@@ -55,18 +57,15 @@ namespace GameSystemObjects.Players
                // Save the player's current task, not all tasks.
                // This needs to be called any time the task is switched
 
-
-
-               var item = p.getEnabledTask();
-
             using (var c = new SqlConnection(m_connectionString))
             {
-                await c.ExecuteAsync("spUPDATE_dbo_Inventory_with_TableType", p.items, commandType: CommandType.StoredProcedure);
+                //await c.ExecuteAsync("spUPDATE_dbo_Inventory_with_TableType", items, commandType: CommandType.StoredProcedure);
 
-                //await c.QueryAsync("UPDATE dbo.Inventory " +
-                //             "SET amount = " + item.itemAmount + 
-                //             " WHERE player_id = " + p.Id +
-                //             " AND inventory_id = " + item.taskId);
+                p.items.ForEach( async (i) =>
+                {
+                    await c.QueryAsync($@"UPDATE dbo.Inventory SET amount = {i.itemAmount} WHERE player_id = {p._id} AND inventory_item = {i.taskId}");
+                });
+
             }
         }
 
