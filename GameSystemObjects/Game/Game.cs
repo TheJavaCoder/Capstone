@@ -1,4 +1,5 @@
 ﻿using GameSystemObjects.Players;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Concurrent;
@@ -174,8 +175,8 @@ namespace GameSystemObjects.Game
         // Passing in the repository instance
         public Game(IServiceProvider serviceCollection)
         {
-            // Commented out as this doesn't exist yet.
-            //playerRepository = serviceCollection.GetRequiredService<IPlayerRepository>();
+            
+            playerRepository = serviceCollection.GetRequiredService<IPlayerRepository>();
         }
 
 
@@ -186,9 +187,9 @@ namespace GameSystemObjects.Game
             gameThread = new Thread(new ThreadStart(gl.run));
             gameThread.Start();
 
-            //GameSave gs = new GameSave(playerRepository);
-            //saveThread = new Thread(new ThreadStart(gs.run));
-            //saveThread.Start();
+            GameSave gs = new GameSave(playerRepository);
+            saveThread = new Thread(new ThreadStart(gs.run));
+            saveThread.Start();
 
             CleanUpSessions cus = new CleanUpSessions();
             cleanUpSessions = new Thread(new ThreadStart(cus.run));
@@ -200,7 +201,7 @@ namespace GameSystemObjects.Game
         public async Task StopAsync(CancellationToken cancellationToken)
         {
             gameThread.Suspend();
-            //saveThread.Suspend();
+            saveThread.Suspend();
         }
     }
 
