@@ -18,9 +18,18 @@ namespace WPF_Clicker
     /// </summary>
     public partial class Stats : Page
     {
-        public Stats()
+
+        MainWindow window;
+
+        public Stats(MainWindow w)
         {
             InitializeComponent();
+            window = w;
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            window.Navigate(new Settings(window));
         }
     }
 }
