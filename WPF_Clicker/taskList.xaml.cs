@@ -28,7 +28,7 @@ namespace WPF_Clicker
 
         public taskList(MainWindow w)
         {
-            window.InitializeComponent();
+            InitializeComponent();
             window = w;
         }
 

@@ -67,7 +67,7 @@
 
         <StackPanel>
             
-            <Button Margin="0,380,0,0" Width="100" Height="50" Click="Button_Click">
+            <Button Margin="0,380,0,0" Width="100" Height="50" Click="Button_Click_1">
                 Sign Out
             </Button>
             
@@ -75,7 +75,7 @@
 
         <StackPanel HorizontalAlignment="Left" Width="330">
 
-            <Button Margin="0,100,0,0" Width="200" Height="50" Click="Button_Click">
+            <Button Margin="0,100,0,0" Width="200" Height="50" Click="Button_Click_2">
                 Show Stats
             </Button>
             
@@ -83,7 +83,7 @@
 
         <StackPanel HorizontalAlignment="Left" Width="330">
 
-            <Button Margin="0,200,0,0" Width="200" Height="50" Click="Button_Click">
+            <Button Margin="0,200,0,0" Width="200" Height="50" Click="Button_Click_3">
                 Leaderboard
             </Button>
 
