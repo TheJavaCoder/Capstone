@@ -48,20 +48,28 @@
         <Label HorizontalAlignment="Center" FontSize="25" FontStyle="Normal" Foreground="White" FontWeight="ExtraLight">Settings</Label>
         <Line X1="00" Y1="50" X2="290" Y2="50" HorizontalAlignment="Center" Stroke="white" StrokeThickness="1" SnapsToDevicePixels="True" />
 
+
         <ScrollViewer Margin="0, 55, 0, 60" HorizontalScrollBarVisibility="Disabled" x:Name="ContenContainer"></ScrollViewer>
 
-        <Grid Height="60"  Grid.Row="1" Margin="00" VerticalAlignment="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <StackPanel  Width="240">
+            <Label Content="Online Players:" Foreground="White" HorizontalAlignment="Left"/>
+            <Label x:Name="onlinePlayersText" Content="##" HorizontalAlignment="Left" Background="{x:Null}" Foreground="White"/>
 
-            <Button x:Name="TaskButton" Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" BorderThickness="0 0 1 0" Cursor="Hand" Click="TaskButton_Click" Content="{StaticResource pick}"></Button>
-            <Button Template="{DynamicResource ButtonTemplate1}" Background="#545454" Foreground="White" Grid.Column="2" BorderThickness="1 0 0 0" Cursor="Hand" Content="{StaticResource hamburger}"></Button>
-        </Grid>
+            <Label Content="Session Up-time:" Foreground="White"/>
+            <Label x:Name="sessionUptime" Content="##" Background="{x:Null}" Foreground="White"/>
 
+            <Label Content="Server Up-time:" Foreground="White"/>
+            <Label x:Name="serverUptime" Content="##" Background="{x:Null}" Foreground="White"/>
 
+            <Label Content="Server Leader Board:" Foreground="White"/>
 
+            <ScrollViewer x:Name="onlineLeaderboard" Height="100">
+                
+            </ScrollViewer>
+
+            <Button Margin="0,280,0,0" Width="100" Click="Button_Click" Content="Sign Out"/>
+        </StackPanel>
+        </ScrollViewer>
 
 
 
@@ -88,6 +96,17 @@
             </Button>
 
         </StackPanel>
+
+
+        <Grid Height="60"  Grid.Row="1" Margin="00" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="TaskButton" Template="{DynamicResource ButtonTemplate1}" Background="#303030" Foreground="White" BorderThickness="0 0 1 0" Cursor="Hand" Click="TaskButton_Click" Content="{StaticResource pick}"></Button>
+            <Button Template="{DynamicResource ButtonTemplate1}" Background="#545454" Foreground="White" Grid.Column="2" BorderThickness="1 0 0 0" Cursor="Hand" Content="{StaticResource hamburger}"></Button>
+        </Grid>
 
     </Grid>
 </Page>

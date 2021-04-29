@@ -10,6 +10,7 @@ namespace GameSystemObjects.Players
     public class Player
     {
         public int _id { get; set; }
+
         public string name { get; set; }
 
         public string profilePic { get; set; }
@@ -20,7 +21,7 @@ namespace GameSystemObjects.Players
         public PlayerStats stats { get; set; }
 
         public DateTime lastSeenTime { get; set; }
-        public int Id { get; set; }
+        
 
 
         public Player()
