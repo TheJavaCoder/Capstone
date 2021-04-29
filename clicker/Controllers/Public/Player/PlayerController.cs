@@ -62,13 +62,14 @@ namespace clicker.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<bool>> SaveAndRemove(String name)
+        [Route("{playerName}")]
+        public async Task<ActionResult<bool>> SaveAndRemove(string playerName)
         {
 
             Player p;
-            GameState.current.players.TryRemove(name, out p);
+            GameState.current.players.TryRemove(playerName, out p);
             GameStat.current.numPlayers--;
-            await m_PlayerRepository.SavePlayer(p);
+            //await m_PlayerRepository.SavePlayer(p);
 
             return true;
         }

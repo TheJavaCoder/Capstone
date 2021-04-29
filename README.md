@@ -9,6 +9,9 @@ Placidie Mugabo,
 Bailey Costello,
 Alan Farmer
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 # GameSystemObjects Documentation
 Why it exists and why certain abstractions were created.
 ## Controller Models
@@ -91,3 +94,64 @@ Object that holds all task data.
 * **timeCalc** - The time it takes for the task to complete and add to itemAmount, long
 * **enabled** - Whether the task is running or not, bool
 * **upgradeGatheringLevelCost** - Method to determin the upgrade cost of this task, int
+=======
+## Installation
+=======
+<!--- ## Installation
+>>>>>>> 65aaf36 (commenting out installation and usage)
+=======
+<!--- ## Installation
+>>>>>>> 2c2be1e147929dcf3dd19ab9534615e2a7cd8ceb
+
+<!--- If you are starting a project from scratch and will host the code on Github, hit the "Use this template" button above the code to get started. If you will host elsewhere, clone this repo and start your project from there.
+
+<!--- ## Usage
+
+<!--- These files only change how your project behaves on github, and most of them will only take effect once merged into your default branch (usually `master` or `dev`).
+
+<!--- Keep them up-to-date as your project evolves. 
+
+# Contents
+
+Here's a rundown of the files included, as well as why they're important:
+
+## clicker
+
+
+
+## GameSystemObjects
+
+
+
+## GameSystemObjectsTest
+
+
+## WPF_Clicker
+
+This is our GUI for our project. We are using WPF with C# ASP.net core framework to show for our front-end. 
+
+
+### App.xaml
+
+
+### Leaderboard.xaml
+
+
+### loginPage.xaml
+
+
+### MainWindow.xaml
+
+
+### Settings.xaml
+
+
+### Stats.xaml
+
+
+### taskList.xaml
+
+<<<<<<< HEAD
+>>>>>>> a67432d (updated content for formatting)
+=======
+>>>>>>> 2c2be1e147929dcf3dd19ab9534615e2a7cd8ceb

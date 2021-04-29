@@ -28,6 +28,26 @@ namespace WPF_Clicker
             await settingsWindow.LogoutPlayerAsync();
         }
 
+
+        //Sign Out
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            await settingsWindow.LogoutPlayerAsync();
+        }
+
+        //Show stats
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //Leadorboard
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
     }
 }
 

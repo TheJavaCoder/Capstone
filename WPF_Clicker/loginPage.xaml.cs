@@ -33,7 +33,7 @@ namespace WPF_Clicker
             }
             else
             {
-                //TODO display message
+                ErrorLabel.Content = "invaild login";
             }
 
 
