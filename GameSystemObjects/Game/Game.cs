@@ -1,5 +1,4 @@
 ﻿using GameSystemObjects.Players;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Concurrent;
@@ -80,13 +79,17 @@ namespace GameSystemObjects.Game
     {
         IPlayerRepository playerRepository;
 
+        public GameSave()
+        {
+        }
+
         // Getting the repository instance that this thread needs to use.
         public GameSave(IPlayerRepository playerRepository)
         {
             this.playerRepository = playerRepository;
         }
 
-        public void run()
+        public async void run()
         {
 
             while (true)
@@ -98,7 +101,8 @@ namespace GameSystemObjects.Game
                     {
                         Player p;
                         GameState.current.players.TryGetValue(key, out p);
-                        playerRepository.SavePlayer(p);
+                        if(playerRepository != null)
+                            playerRepository.SavePlayer(p);
                     }
 
                 }
@@ -116,12 +120,11 @@ namespace GameSystemObjects.Game
 
         public CleanUpSessions()
         {
-
         }
 
-        public CleanUpSessions(IPlayerRepository playerRepository)
+        public CleanUpSessions(IPlayerRepository pr)
         {
-            this.playerRepository = playerRepository;
+            this.playerRepository = pr;
         }
 
         public async void run()
@@ -144,7 +147,7 @@ namespace GameSystemObjects.Game
                         if (p.lastSeenTime.AddMinutes(1) < DateTime.Now)
                         {
                             if (playerRepository != null)
-                                playerRepository.SavePlayer(p);
+                                await playerRepository.SavePlayer(p);
                             GameState.current.players.TryRemove(p.name, out _);
                             GameStat.current.numPlayers--;
                         }
@@ -203,13 +206,13 @@ namespace GameSystemObjects.Game
         Thread cleanUpSessions;
         Thread updateGameStats;
 
-        public Game() { }
+        public Game() {
+        }
 
         // Passing in the repository instance
-        public Game(IServiceProvider serviceCollection)
+        public Game(IPlayerRepository pr)
         {
-            
-            playerRepository = serviceCollection.GetRequiredService<IPlayerRepository>();
+            playerRepository = new PlayerRepository("data source=tcp:s20.winhost.com;initial catalog=DB_111206_clicker;persist security info=True;user id=DB_111206_clicker_user;password=gtc2021;MultipleActiveResultSets=True;");
         }
 
 
@@ -224,7 +227,7 @@ namespace GameSystemObjects.Game
             saveThread = new Thread(new ThreadStart(gs.run));
             saveThread.Start();
 
-            CleanUpSessions cus = new CleanUpSessions();
+            CleanUpSessions cus = new CleanUpSessions(playerRepository);
             cleanUpSessions = new Thread(new ThreadStart(cus.run));
             cleanUpSessions.Start();
 
@@ -250,7 +253,6 @@ namespace GameSystemObjects.Game
 
         static GameState()
         {
-            //Init
             current = new GameState { players = new ConcurrentDictionary<string, Player>(), };
         }
 

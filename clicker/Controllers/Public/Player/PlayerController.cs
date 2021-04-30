@@ -1,11 +1,9 @@
-using GameSystemObjects;
 using GameSystemObjects.ControllerModels;
 using GameSystemObjects.Game;
 using GameSystemObjects.Players;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -13,7 +11,7 @@ namespace clicker.Controllers
 {
     [Route("api/player")]
     [ApiController]
-    public class PlayerController : ControllerBase
+    public class PlayerController : Controller
     {
 
         public PlayerController(IPlayerRepository playerRepository)
@@ -69,7 +67,7 @@ namespace clicker.Controllers
             Player p;
             GameState.current.players.TryRemove(playerName, out p);
             GameStat.current.numPlayers--;
-            //await m_PlayerRepository.SavePlayer(p);
+            await m_PlayerRepository.SavePlayer(p);
 
             return true;
         }

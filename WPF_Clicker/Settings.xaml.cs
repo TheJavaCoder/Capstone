@@ -30,15 +30,9 @@ namespace WPF_Clicker
 
 
         //Sign Out
-        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        private async void SignoutButton(object sender, RoutedEventArgs e)
         {
             await settingsWindow.LogoutPlayerAsync();
-        }
-
-        //Show stats
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-
         }
 
         //Leadorboard
