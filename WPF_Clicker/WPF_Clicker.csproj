@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resources\clickerLOGO.png" />
     <None Remove="resources\menu.png" />
     <None Remove="resources\Pick.png" />
     <None Remove="taskList.xaml~RF11f297b2.TMP" />
@@ -20,6 +21,9 @@
 		<ProjectReference Include="..\GameSystemObjects\GameSystemObjects.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Resource Include="resources\clickerLOGO.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Resource>
 	  <Resource Include="resources\menu.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Resource>
