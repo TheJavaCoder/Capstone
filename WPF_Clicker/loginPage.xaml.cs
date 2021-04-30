@@ -44,23 +44,7 @@ namespace WPF_Clicker
         {
             if (e.Key == Key.Return)
             {
-                PlayerLoginModel plm = new PlayerLoginModel
-                {
-                    username = Username.Text,
-                    password = Password.Text
-                };
-
-                var p = await window.loginPlayerAsync(plm);
-                if (p != null)
-                {
-                    window.player = p;
-                    window.Content = new taskList(window);
-                }
-                else
-                {
-                    ErrorLabel.Content = "invaild login";
-                }
-
+                Password.Focus();
             }
         }
 
