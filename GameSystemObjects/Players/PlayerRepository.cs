@@ -53,20 +53,22 @@ namespace GameSystemObjects.Players
 
         public async Task SavePlayer(Player p)
         {
-            
+            if (p == null)
+                return;
                // Save the player's current task, not all tasks.
                // This needs to be called any time the task is switched
 
-            using (var c = new SqlConnection(m_connectionString))
-            {
+            
                 //await c.ExecuteAsync("spUPDATE_dbo_Inventory_with_TableType", items, commandType: CommandType.StoredProcedure);
 
                 p.items.ForEach( async (i) =>
                 {
-                    await c.QueryAsync($@"UPDATE dbo.Inventory SET amount = {i.itemAmount} WHERE player_id = {p._id} AND inventory_item = {i.taskId}");
+                    using (var c = new SqlConnection(m_connectionString))
+                    {
+                        await c.QueryAsync($@"UPDATE dbo.Inventory SET amount = {i.itemAmount} WHERE player_id = {p._id} AND inventory_item = {i.taskId}");
+                    }
                 });
 
-            }
         }
 
         public async Task<IEnumerable<ItemTask>> GetDefaultItemsAsync()
