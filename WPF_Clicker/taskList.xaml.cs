@@ -39,7 +39,7 @@ namespace WPF_Clicker
             {
                 SynchronizationContext.Current.Post(_ => initRender(window.player), null);
 
-                //QueryPlayer(window.webRefreshToken.Token);
+                QueryPlayer(window.webRefreshToken.Token);
             }
         }
 
@@ -52,18 +52,27 @@ namespace WPF_Clicker
 
                 // Link back to the main thread to update values
                 SynchronizationContext.Current.Post(_ => { window.player = p; }, null);
-                SynchronizationContext.Current.Post(_ => { updateRender(); }, null);
+                SynchronizationContext.Current.Post(_ => { updateRender(window.player); }, null);
 
                 // wait loop
                 await Task.Delay(300);
             }
         }
 
-        private void updateRender()
+        private void updateRender(Player p)
         {
-            foreach ( UIElement uI in ContentContainer.Children )
+            if(p.GetItems() == null)
             {
-                
+                return;
+            }
+
+            foreach (ItemTask item in p.GetItems())
+            {
+                var amount = FindChild<Label>(ContentContainer, item.itemName.Replace(" ", "") + "_Amount");
+                amount.Content = "Inventory Amount: " + item.itemAmount;
+
+                var lvl = FindChild<Label>(ContentContainer, item.itemName.Replace(" ", "") + "_Lvl");
+                lvl.Content = "Level: " + item.resourceGatheringLevel;
             }
         }
 
@@ -164,9 +173,12 @@ namespace WPF_Clicker
         {
             // Stop the previous progress bar
 
-            if (currentTaskPanel != null)
+            if (currentTaskPanel != null || CurrentTask != "")
             {
                 currentTaskPanel.Children.RemoveAt(currentTaskPanel.Children.Count - 1);
+                CurrentTask = "";
+                currentTaskPanel = null;
+                return;
             }
 
             // Start the current Progress bar and send the request off to the server
@@ -195,9 +207,9 @@ namespace WPF_Clicker
             parent.Children.Add(pb);
         }
 
-        public async void UpgradeBtn_Click(object sender, RoutedEventArgs e)
+        public void UpgradeBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            window.ExcuteAction(CurrentTask, "UPGRADE");
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
@@ -212,6 +224,51 @@ namespace WPF_Clicker
                 await initData();
                 loaded = true;
             }
+        }
+
+
+        public static T FindChild<T>(DependencyObject parent, string childName)
+   where T : DependencyObject
+        {
+            // Confirm parent and childName are valid. 
+            if (parent == null) return null;
+
+            T foundChild = null;
+
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childrenCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                // If the child is not of the request child type child
+                T childType = child as T;
+                if (childType == null)
+                {
+                    // recursively drill down the tree
+                    foundChild = FindChild<T>(child, childName);
+
+                    // If the child is found, break so we do not overwrite the found child. 
+                    if (foundChild != null) break;
+                }
+                else if (!string.IsNullOrEmpty(childName))
+                {
+                    var frameworkElement = child as FrameworkElement;
+                    // If the child's name is set for search
+                    if (frameworkElement != null && frameworkElement.Name == childName)
+                    {
+                        // if the child's name is of the request name
+                        foundChild = (T)child;
+                        break;
+                    }
+                }
+                else
+                {
+                    // child element found.
+                    foundChild = (T)child;
+                    break;
+                }
+            }
+
+            return foundChild;
         }
 
     }

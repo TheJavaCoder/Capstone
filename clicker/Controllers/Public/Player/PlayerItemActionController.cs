@@ -45,7 +45,7 @@ namespace clicker.Controllers
                 case Action.SELL:
                     break;
                 case Action.UPGRADE:
-                    output = await p.IncrementItem(playerItemAction.item);
+                    output = await p.UpgradeGatheringLevel(playerItemAction.item);
                     break;
                 default:
                     return false;
