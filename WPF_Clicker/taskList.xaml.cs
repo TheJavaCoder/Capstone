@@ -1,6 +1,7 @@
 ﻿using GameSystemObjects;
 using GameSystemObjects.Players;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,8 +23,9 @@ namespace WPF_Clicker
 
         private string CurrentTask = "";
         private StackPanel currentTaskPanel;
-
         private bool loaded = false;
+
+        private int delay = 300;
 
         public taskList(MainWindow w)
         {
@@ -39,6 +41,7 @@ namespace WPF_Clicker
             {
                 SynchronizationContext.Current.Post(_ => initRender(window.player), null);
 
+                
                 QueryPlayer(window.webRefreshToken.Token);
             }
         }
@@ -55,13 +58,13 @@ namespace WPF_Clicker
                 SynchronizationContext.Current.Post(_ => { updateRender(window.player); }, null);
 
                 // wait loop
-                await Task.Delay(300);
+                await Task.Delay(delay);
             }
         }
 
         private void updateRender(Player p)
         {
-            if(p.GetItems() == null)
+            if(p == null)
             {
                 return;
             }
@@ -226,6 +229,10 @@ namespace WPF_Clicker
             }
         }
 
+        public long findLowestUpdateTime()
+        {
+            return window.player.GetItems().OrderBy((x) => x.timeCalc).Take(1).ElementAt(0).timeCalc;
+        }
 
         public static T FindChild<T>(DependencyObject parent, string childName)
    where T : DependencyObject

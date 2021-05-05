@@ -65,7 +65,7 @@ namespace GameSystemObjects.Players
                 {
                     using (var c = new SqlConnection(m_connectionString))
                     {
-                        await c.QueryAsync($@"UPDATE dbo.Inventory SET amount = {i.itemAmount} WHERE player_id = {p._id} AND inventory_item = {i.taskId}");
+                        await c.QueryAsync($@"UPDATE dbo.Inventory SET amount = {i.itemAmount}, resourceGatheringLevel = {i.resourceGatheringLevel} WHERE player_id = {p._id} AND inventory_item = {i.taskId}");
                     }
                 });
 

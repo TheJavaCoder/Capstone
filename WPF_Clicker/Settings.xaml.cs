@@ -32,6 +32,7 @@ namespace WPF_Clicker
         //Sign Out
         private async void SignoutButton(object sender, RoutedEventArgs e)
         {
+            settingsWindow.close();
             await settingsWindow.LogoutPlayerAsync();
         }
 
