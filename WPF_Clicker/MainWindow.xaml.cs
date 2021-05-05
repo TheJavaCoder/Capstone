@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 
@@ -17,6 +18,7 @@ namespace WPF_Clicker
     {
         public Player player = null;
         HttpClient client;
+        public CancellationTokenSource webRefreshToken = new CancellationTokenSource();
 
         public MainWindow()
         {
@@ -46,6 +48,11 @@ namespace WPF_Clicker
             return player;
         }
 
+        public async Task<Player> GetPlayerAsync()
+        {
+            return await GetPlayerAsync(player.name);
+        }
+
         public async Task<Player> GetPlayerAsync(string pName)
         {
             HttpResponseMessage responseMessage = await client.GetAsync("api/player/" + pName);
@@ -72,6 +79,35 @@ namespace WPF_Clicker
                 return true;
             }
             return false;
+        }
+
+        public async Task<bool> ExcuteAction(string item, string action)
+        {
+            var obj = new
+            {
+                player = player.name,
+                item = item,
+                action = action,
+            };
+
+            var json = JsonConvert.SerializeObject(obj);
+
+            var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+            var byteContent = new ByteArrayContent(buffer);
+
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            HttpResponseMessage responseMessage = await client.PostAsync("api/action/", byteContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return await responseMessage.Content.ReadAsAsync<bool>(Formatter.MediaTypeFormatters);
+            }
+            return false;
+        }
+
+        public void close()
+        {
+            webRefreshToken.Cancel();
         }
     }
 }

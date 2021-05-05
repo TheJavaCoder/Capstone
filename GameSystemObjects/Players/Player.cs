@@ -113,8 +113,14 @@ namespace GameSystemObjects.Players
             ItemTask currentlyEnabled = getEnabledTask();
             ItemTask toBeEnabled = getItem(name);
 
-            if (currentlyEnabled == null || toBeEnabled == null)
+            if (toBeEnabled == null)
                 return false;
+
+            if (currentlyEnabled == null)
+            {
+                toBeEnabled.enabled = true;
+                return true;
+            }
 
             currentlyEnabled.enabled = false;
             toBeEnabled.enabled = true;

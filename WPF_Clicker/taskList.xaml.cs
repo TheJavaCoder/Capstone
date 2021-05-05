@@ -24,7 +24,6 @@ namespace WPF_Clicker
         private StackPanel currentTaskPanel;
 
         private bool loaded = false;
-        private object window1;
 
         public taskList(MainWindow w)
         {
@@ -32,21 +31,43 @@ namespace WPF_Clicker
             window = w;
         }
 
-        public taskList(object window1)
-        {
-            this.window1 = window1;
-        }
 
-        public async Task initData()
+        private async Task initData()
         {
 
             if (window.player != null)
             {
                 SynchronizationContext.Current.Post(_ => initRender(window.player), null);
+
+                //QueryPlayer(window.webRefreshToken.Token);
             }
         }
 
-        public void initRender(Player p)
+        private async Task QueryPlayer(CancellationToken ct)
+        {
+            while(!ct.IsCancellationRequested)
+            {
+                // async await web call
+                var p = await window.GetPlayerAsync();
+
+                // Link back to the main thread to update values
+                SynchronizationContext.Current.Post(_ => { window.player = p; }, null);
+                SynchronizationContext.Current.Post(_ => { updateRender(); }, null);
+
+                // wait loop
+                await Task.Delay(300);
+            }
+        }
+
+        private void updateRender()
+        {
+            foreach ( UIElement uI in ContentContainer.Children )
+            {
+                
+            }
+        }
+
+        private void initRender(Player p)
         {
             foreach (ItemTask item in p.GetItems())
             {
@@ -54,7 +75,7 @@ namespace WPF_Clicker
             }
         }
 
-        public Border CreateItemTask(ItemTask item)
+        private Border CreateItemTask(ItemTask item)
         {
             // For the rounded corners
             Border b = new Border();
@@ -164,11 +185,13 @@ namespace WPF_Clicker
             pb.Height = 10;
             pb.Margin = new Thickness(-8, 8, -8, -8);
 
-            Duration d = new Duration(TimeSpan.FromMilliseconds(window.player.getItem(CurrentTask).timeCalc));
+            Duration d = new Duration(TimeSpan.FromTicks(window.player.getItem(CurrentTask).timeCalc));
             DoubleAnimation da = new DoubleAnimation(window.player.getItem(this.CurrentTask).timeCalc, d);
             da.RepeatBehavior = RepeatBehavior.Forever;
             pb.BeginAnimation(ProgressBar.ValueProperty, da);
 
+            window.ExcuteAction(CurrentTask, "ENABLE");
+           
             parent.Children.Add(pb);
         }
 
