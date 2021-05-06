@@ -175,19 +175,29 @@ namespace WPF_Clicker
         public void StartBtn_Click(object sender, RoutedEventArgs e)
         {
             // Stop the previous progress bar
-
-            if (currentTaskPanel != null || CurrentTask != "")
+            var parent = (StackPanel)((e.Source as Button).Parent as Grid).Parent;
+            if (currentTaskPanel != null) 
             {
+                if (currentTaskPanel != parent) {
+                    currentTaskPanel.Children.RemoveAt(currentTaskPanel.Children.Count - 1);
+                    CurrentTask = "";
+                    currentTaskPanel = null;
+                    window.ExcuteAction(CurrentTask, "DISABLE");
+                    return;
+                } 
+            }
+
+            if (CurrentTask == (e.Source as Button).Name) {
                 currentTaskPanel.Children.RemoveAt(currentTaskPanel.Children.Count - 1);
                 CurrentTask = "";
                 currentTaskPanel = null;
+                window.ExcuteAction(CurrentTask, "DISABLE");
                 return;
             }
 
             // Start the current Progress bar and send the request off to the server
             this.CurrentTask = (e.Source as Button).Name;
-
-            var parent = (StackPanel)((e.Source as Button).Parent as Grid).Parent;
+            
             this.currentTaskPanel = parent;
 
             ProgressBar pb = new ProgressBar();
