@@ -25,7 +25,7 @@ namespace WPF_Clicker
         private StackPanel currentTaskPanel;
         private bool loaded = false;
 
-        private int delay = 300;
+        private int delay = 1000;
 
         public taskList(MainWindow w)
         {

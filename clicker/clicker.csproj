@@ -8,4 +8,8 @@
     <ProjectReference Include="..\GameSystemObjects\GameSystemObjects.csproj" />
   </ItemGroup>
 
+  <PropertyGroup> 
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+</PropertyGroup>
+  
 </Project>

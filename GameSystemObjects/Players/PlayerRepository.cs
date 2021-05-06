@@ -32,7 +32,10 @@ namespace GameSystemObjects.Players
                 var playerDB = await c.QuerySingleOrDefaultAsync<PlayerLoginModel>("spSELECT_dbo_Player_With_Params", param: new { username = name }, commandType: System.Data.CommandType.StoredProcedure);
 
                 if (playerDB == null)
+                {
+                    c.Close();
                     return null;
+                }
 
                 var inventory = await c.QueryAsync<itemTaskModel_Return>("spSELECT_dbo_Inventory_With_Params", param: new { playerDB.player_ID } , commandType: System.Data.CommandType.StoredProcedure);
 
@@ -47,6 +50,8 @@ namespace GameSystemObjects.Players
 
                 var playerReturn = new Player(itemTasks, name);
                 playerReturn._id = playerDB.player_ID;
+
+                c.Close();
                 return playerReturn;
             }
         }
@@ -66,6 +71,7 @@ namespace GameSystemObjects.Players
                     using (var c = new SqlConnection(m_connectionString))
                     {
                         await c.QueryAsync($@"UPDATE dbo.Inventory SET amount = {i.itemAmount}, resourceGatheringLevel = {i.resourceGatheringLevel} WHERE player_id = {p._id} AND inventory_item = {i.taskId}");
+                        c.Close();
                     }
                 });
 
@@ -80,6 +86,7 @@ namespace GameSystemObjects.Players
                 var list = new List<ItemTask>();
                 items.ToList().ForEach((i) => list.Add(new ItemTask(i)));
 
+                c.Close();
                 return list;
             }
         }
@@ -92,13 +99,19 @@ namespace GameSystemObjects.Players
 
                 if (player == null)
                 {
+                    c.Close();
                     await CreatePlayer(playerLoginModel);
+                    
                     return true;
                 }
 
                 if (playerLoginModel.password != player.password)
+                {
+                    c.Close();
                     return false;
+                }
 
+                c.Close();
                 return true;
             }
         }
@@ -115,6 +128,7 @@ namespace GameSystemObjects.Players
                 {
                     i.itemAmount = 1;
                     i.player_id = pID;
+                    c.Close();
                     return new ItemTask_Insert(i);
                 }).ToDataTable();
 
@@ -126,6 +140,8 @@ namespace GameSystemObjects.Players
                     Console.WriteLine(e.StackTrace);
                 }
 
+                c.Close();
+
                 return pID;
             }
         }
@@ -133,7 +149,10 @@ namespace GameSystemObjects.Players
         public async Task RemovePlayer(string player)
         {
             using (var c = new SqlConnection(m_connectionString))
+            {
                 await c.QueryAsync($"DELETE FROM dbo.Player WHERE username = '{player}'");
+                c.Close();
+            }
         }
 
         public Task GetStats(string player)
