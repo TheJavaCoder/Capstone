@@ -9,8 +9,6 @@
       Title="loginPage">
 
     <Grid>
-        <Image Source="resources/clickerLOGO.png" Width="200" Margin="0, -200, 0,0"></Image>
-        
         <StackPanel Margin="70,130,70,0">
             <Label Foreground="White">Username:</Label>
             <TextBox x:Name="Username" TextAlignment="Center" Padding="5" Margin="0,0,0,0"
