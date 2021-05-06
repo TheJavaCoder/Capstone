@@ -1,6 +1,7 @@
 ﻿using GameSystemObjects;
 using GameSystemObjects.Players;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,9 +23,9 @@ namespace WPF_Clicker
 
         private string CurrentTask = "";
         private StackPanel currentTaskPanel;
-
         private bool loaded = false;
-        private object window1;
+
+        private int delay = 300;
 
         public taskList(MainWindow w)
         {
@@ -32,21 +33,53 @@ namespace WPF_Clicker
             window = w;
         }
 
-        public taskList(object window1)
-        {
-            this.window1 = window1;
-        }
 
-        public async Task initData()
+        private async Task initData()
         {
 
             if (window.player != null)
             {
                 SynchronizationContext.Current.Post(_ => initRender(window.player), null);
+
+                
+                QueryPlayer(window.webRefreshToken.Token);
             }
         }
 
-        public void initRender(Player p)
+        private async Task QueryPlayer(CancellationToken ct)
+        {
+            while(!ct.IsCancellationRequested)
+            {
+                // async await web call
+                var p = await window.GetPlayerAsync();
+
+                // Link back to the main thread to update values
+                SynchronizationContext.Current.Post(_ => { window.player = p; }, null);
+                SynchronizationContext.Current.Post(_ => { updateRender(window.player); }, null);
+
+                // wait loop
+                await Task.Delay(delay);
+            }
+        }
+
+        private void updateRender(Player p)
+        {
+            if(p == null)
+            {
+                return;
+            }
+
+            foreach (ItemTask item in p.GetItems())
+            {
+                var amount = FindChild<Label>(ContentContainer, item.itemName.Replace(" ", "") + "_Amount");
+                amount.Content = "Inventory Amount: " + item.itemAmount;
+
+                var lvl = FindChild<Label>(ContentContainer, item.itemName.Replace(" ", "") + "_Lvl");
+                lvl.Content = "Level: " + item.resourceGatheringLevel;
+            }
+        }
+
+        private void initRender(Player p)
         {
             foreach (ItemTask item in p.GetItems())
             {
@@ -54,7 +87,7 @@ namespace WPF_Clicker
             }
         }
 
-        public Border CreateItemTask(ItemTask item)
+        private Border CreateItemTask(ItemTask item)
         {
             // For the rounded corners
             Border b = new Border();
@@ -142,16 +175,29 @@ namespace WPF_Clicker
         public void StartBtn_Click(object sender, RoutedEventArgs e)
         {
             // Stop the previous progress bar
-
-            if (currentTaskPanel != null)
+            var parent = (StackPanel)((e.Source as Button).Parent as Grid).Parent;
+            if (currentTaskPanel != null) 
             {
+                if (currentTaskPanel != parent) {
+                    currentTaskPanel.Children.RemoveAt(currentTaskPanel.Children.Count - 1);
+                    CurrentTask = "";
+                    currentTaskPanel = null;
+                    window.ExcuteAction(CurrentTask, "DISABLE");
+                    return;
+                } 
+            }
+
+            if (CurrentTask == (e.Source as Button).Name) {
                 currentTaskPanel.Children.RemoveAt(currentTaskPanel.Children.Count - 1);
+                CurrentTask = "";
+                currentTaskPanel = null;
+                window.ExcuteAction(CurrentTask, "DISABLE");
+                return;
             }
 
             // Start the current Progress bar and send the request off to the server
             this.CurrentTask = (e.Source as Button).Name;
-
-            var parent = (StackPanel)((e.Source as Button).Parent as Grid).Parent;
+            
             this.currentTaskPanel = parent;
 
             ProgressBar pb = new ProgressBar();
@@ -164,17 +210,19 @@ namespace WPF_Clicker
             pb.Height = 10;
             pb.Margin = new Thickness(-8, 8, -8, -8);
 
-            Duration d = new Duration(TimeSpan.FromMilliseconds(window.player.getItem(CurrentTask).timeCalc));
+            Duration d = new Duration(TimeSpan.FromTicks(window.player.getItem(CurrentTask).timeCalc));
             DoubleAnimation da = new DoubleAnimation(window.player.getItem(this.CurrentTask).timeCalc, d);
             da.RepeatBehavior = RepeatBehavior.Forever;
             pb.BeginAnimation(ProgressBar.ValueProperty, da);
 
+            window.ExcuteAction(CurrentTask, "ENABLE");
+           
             parent.Children.Add(pb);
         }
 
-        public async void UpgradeBtn_Click(object sender, RoutedEventArgs e)
+        public void UpgradeBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            window.ExcuteAction(CurrentTask, "UPGRADE");
         }
 
         private void Settings_Click(object sender, RoutedEventArgs e)
@@ -189,6 +237,55 @@ namespace WPF_Clicker
                 await initData();
                 loaded = true;
             }
+        }
+
+        public long findLowestUpdateTime()
+        {
+            return window.player.GetItems().OrderBy((x) => x.timeCalc).Take(1).ElementAt(0).timeCalc;
+        }
+
+        public static T FindChild<T>(DependencyObject parent, string childName)
+   where T : DependencyObject
+        {
+            // Confirm parent and childName are valid. 
+            if (parent == null) return null;
+
+            T foundChild = null;
+
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (int i = 0; i < childrenCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                // If the child is not of the request child type child
+                T childType = child as T;
+                if (childType == null)
+                {
+                    // recursively drill down the tree
+                    foundChild = FindChild<T>(child, childName);
+
+                    // If the child is found, break so we do not overwrite the found child. 
+                    if (foundChild != null) break;
+                }
+                else if (!string.IsNullOrEmpty(childName))
+                {
+                    var frameworkElement = child as FrameworkElement;
+                    // If the child's name is set for search
+                    if (frameworkElement != null && frameworkElement.Name == childName)
+                    {
+                        // if the child's name is of the request name
+                        foundChild = (T)child;
+                        break;
+                    }
+                }
+                else
+                {
+                    // child element found.
+                    foundChild = (T)child;
+                    break;
+                }
+            }
+
+            return foundChild;
         }
 
     }

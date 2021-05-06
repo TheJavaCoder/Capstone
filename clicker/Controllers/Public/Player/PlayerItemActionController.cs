@@ -18,6 +18,7 @@ namespace clicker.Controllers
 
         }
 
+        [HttpPost]
         public async Task<ActionResult<bool>> ExcuteActionAsync(PlayerItemActionModel playerItemAction)
         {
             Player p = await GameState.GetPlayer(playerItemAction.player);
@@ -29,7 +30,9 @@ namespace clicker.Controllers
 
             bool output = false;
 
-            switch (playerItemAction.action)
+            Action action = (Action)Enum.Parse(typeof(Action), playerItemAction.action);
+
+            switch (action)
             {
                 case Action.ENABLE:
                     output = await p.switchEnabledTask(playerItemAction.item);
@@ -42,7 +45,7 @@ namespace clicker.Controllers
                 case Action.SELL:
                     break;
                 case Action.UPGRADE:
-                    output = await p.IncrementItem(playerItemAction.item);
+                    output = await p.UpgradeGatheringLevel(playerItemAction.item);
                     break;
                 default:
                     return false;

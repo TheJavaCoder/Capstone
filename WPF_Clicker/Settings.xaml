@@ -68,7 +68,7 @@
                 <Button Margin="0,20,0,0" Width="150" Height="40" Click="Button_Click_3">
                     Leaderboard
                 </Button>
-                <Button Margin="0,20,0,0" Width="150" Height="40" Click="Button_Click" Content="Sign Out"/>
+                <Button Margin="0,20,0,0" Width="150" Height="40" Click="SignoutButton" Content="Sign Out"/>
         </StackPanel>
 
 
