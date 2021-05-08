@@ -9,9 +9,7 @@ Placidie Mugabo,
 Bailey Costello,
 Alan Farmer
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 # GameSystemObjects Documentation
 Why it exists and why certain abstractions were created.
 ## Controller Models
@@ -150,8 +148,3 @@ This is our GUI for our project. We are using WPF with C# ASP.net core framework
 
 
 ### taskList.xaml
-
-<<<<<<< HEAD
->>>>>>> a67432d (updated content for formatting)
-=======
->>>>>>> 2c2be1e147929dcf3dd19ab9534615e2a7cd8ceb
